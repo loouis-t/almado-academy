@@ -1,0 +1,139 @@
+@use '../../styles.scss' as c;
+
+article {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 4em;
+    height: calc(100vh - 4em);
+
+    padding: c.$PADDING;
+
+    ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+            padding: .5em 0;
+
+            span {
+                color: transparent;
+            }
+
+        }
+        
+    }
+
+    h1 {
+        font-weight: normal;
+        font-size: 2em;
+
+        margin: 2em 0 2em 0;
+
+        span {
+            background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(45deg,#0a5ac2 30%,#7da6cf,#024397 70%);
+        }
+    }
+
+    #prestations {
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+
+
+        section {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            padding: 1.5em;
+
+            width: calc((60vw - 8em) / 3);
+            height: calc(16 * ((60vw - 8em) / 27)); // 4:3
+
+            border: 2px solid;
+            border-image-slice: 1;
+            border-image-source: c.$TEXT_GRADIENT;
+
+            .description {
+                h2 {
+                    font-weight: normal;
+                    font-size: 1.75em;
+                    margin-bottom: 0;
+                }
+
+                hr {
+                    border-bottom: 1px solid white;
+                }
+
+                ul {
+                    padding-top: 1em;
+                    font-size: 1.1em;
+
+                    .pad {
+                        padding: .25em 1em;
+                        // font-weight: bold;
+                    }
+                }
+            }
+
+
+            .prix {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                
+                h3 {
+                    font-weight: normal;
+                    font-size: 2.5em;
+                    margin: 0;
+                    padding-bottom: .5em;
+                }
+                
+                a {
+                    &:first-of-type {
+                        padding: .25em 1.5em;
+                        border-radius: 10em;
+                        font-size: 1.25em;
+                        width: fit-content;
+                        
+                        text-decoration: none;
+                        
+                        position: relative;
+                        background: black;
+                        box-sizing: padding-box;
+                        
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            top: -2px;
+                            left: -2px;
+                            width: 100%;
+                            height: 100%;
+                            background: c.$TEXT_GRADIENT;
+                            padding: 2px;
+                            border-radius: inherit;
+                            
+                            z-index: -1;
+                        }
+                        
+                        span {
+                            background-clip: text;
+                            color: transparent;
+                            background-image: c.$TEXT_GRADIENT;
+                        }
+                    }
+                    
+                    &:last-of-type {
+                        font-size: .75em;
+                        padding-top: 2em;
+                    }
+                }
+            }
+        }
+    }
+}
