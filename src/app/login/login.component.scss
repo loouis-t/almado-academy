@@ -1,0 +1,6 @@
+@use '../../styles.scss' as c;
+
+article {
+    margin-top: 4em;
+    min-height: calc(100% - 4em);
+}

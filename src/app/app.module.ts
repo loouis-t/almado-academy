@@ -7,17 +7,28 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ErrPageComponent } from './err-page/err-page.component';
 import { ContactComponent } from './contact/contact.component';
+import { ActualitesComponent } from './actualites/actualites.component';
+import { AproposComponent } from './apropos/apropos.component';
+import { EnconstructionComponent } from './en-construction/enconstruction.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ErrPageComponent
+    ErrPageComponent,
+    ActualitesComponent,
+    AproposComponent,
+    EnconstructionComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot([
+      { path: 'login', component: LoginComponent },
+      { path: 'actu', component: EnconstructionComponent },
+      { path: 'apropos', component: EnconstructionComponent },
       { path: 'contact', component: ContactComponent },
       { path: '', component: HomeComponent },
       { path: '404', component: ErrPageComponent},
@@ -28,7 +39,8 @@ import { ContactComponent } from './contact/contact.component';
   bootstrap: [
     AppComponent,
     HomeComponent,
-    ErrPageComponent
+    ErrPageComponent,
+    EnconstructionComponent
   ]
 })
 export class AppModule { }

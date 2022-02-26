@@ -41,7 +41,7 @@
             span {
                 font-size: 2em;
                 margin: 0 .2em 0 .2em;
-                font-family: serif;
+                font-family: 'Roboto Serif', sans-serif;
             }
     
             &:hover {
@@ -56,9 +56,11 @@
     
         ul {
             display: flex;
+            align-items: center;
     
             li {
                 min-width: 5em;
+                max-height: 4em;
                 padding: 1em;
     
                 text-align: center;
@@ -70,7 +72,11 @@
                 }
     
                 &:hover a {
-                    color: rgba(255, 255, 255, 0.5);
+                    opacity: .5;
+                }
+
+                img {
+                    scale: .75;
                 }
             }
         }
@@ -109,7 +115,7 @@
                 span {
                     font-size: 2em;
                     margin: 0 .2em 0 .2em;
-                    font-family: serif;
+                    font-family: 'Roboto Serif', sans-serif;
                 }
             }
     
@@ -304,7 +310,7 @@
             span {
                 font-size: 2em;
                 margin: 0 .2em 0 .2em;
-                font-family: serif;
+                font-family: 'Roboto Serif', sans-serif;
             }
     
             &:hover {
@@ -421,7 +427,7 @@
             span {
                 font-size: 2em;
                 margin: 0 .2em 0 .2em;
-                font-size: serif;
+                font-family: 'Roboto Serif', sans-serif;
             }
     
             &:hover {

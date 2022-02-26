@@ -4,10 +4,11 @@ article {
     display: flex;
     flex-direction: column;
 
-    margin-top: 4em;
-    height: calc(100vh - 4em);
+    margin: 4em 0 2em 0;
+    min-height: calc(100vh - 4em);
 
     padding: c.$PADDING;
+    transition: c.$TRANSITION_DURATION;
 
     ul {
         list-style: none;
@@ -52,12 +53,17 @@ article {
 
             padding: 1.5em;
 
-            width: calc((60vw - 8em) / 3);
-            height: calc(16 * ((60vw - 8em) / 27)); // 4:3
+            width: calc((60vw - 4em) / 3);
+            min-height: calc(16 * ((60vw - 4em) / 27)); // min: 16:9
 
-            border: 2px solid;
+            border: 2px solid ;
             border-image-slice: 1;
             border-image-source: c.$TEXT_GRADIENT;
+
+            &:first-of-type, &:last-of-type {
+                transform-origin: top;
+                scale: .95;
+            }
 
             .description {
                 h2 {
@@ -76,7 +82,6 @@ article {
 
                     .pad {
                         padding: .25em 1em;
-                        // font-weight: bold;
                     }
                 }
             }
@@ -86,12 +91,22 @@ article {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                row-gap: 1em;
+
                 
                 h3 {
+                    display: flex;
+                    align-items: center;
+                    column-gap: .25em;
+                    
                     font-weight: normal;
                     font-size: 2.5em;
+                    
                     margin: 0;
-                    padding-bottom: .5em;
+                    
+                    span {
+                        font-size: .25em;
+                    }
                 }
                 
                 a {
@@ -126,12 +141,41 @@ article {
                             color: transparent;
                             background-image: c.$TEXT_GRADIENT;
                         }
+
+                        &:hover {
+                            background: rgba(0, 0, 0, .9);
+                        }
                     }
                     
                     &:last-of-type {
                         font-size: .75em;
-                        padding-top: 2em;
+
+                        &:hover {
+                            color: c.$COLOR_TRSP;
+                        }
                     }
+                }
+            }
+
+
+            &:first-of-type, &:last-of-type {
+                position: relative;
+                
+                &::after {
+                    content: "Bientôt disponible!";
+                    position: absolute;
+                    width: calc(100% + 4px);
+                    height: calc(100% + 4px);
+                    top: -2px; left: -2px;
+
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    background: rgba(0, 0, 0, .75);
+
+                    font-size: 1.5em;
                 }
             }
         }
