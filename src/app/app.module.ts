@@ -2,6 +2,17 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { 
+  SocialLoginModule,
+  SocialAuthServiceConfig
+} from 'angularx-social-login';
+import { 
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -24,6 +35,8 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    SocialLoginModule,
     AppRoutingModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
@@ -35,12 +48,24 @@ import { LoginComponent } from './login/login.component';
       { path: '**', redirectTo: '/404'}
     ])
   ],
-  providers: [],
-  bootstrap: [
-    AppComponent,
-    HomeComponent,
-    ErrPageComponent,
-    EnconstructionComponent
-  ]
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider( "413802590846-j47ohhj595srgcb9uh20k9im1bra73tg.apps.googleusercontent.com" )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('477189533893505')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

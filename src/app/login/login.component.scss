@@ -1,6 +1,60 @@
 @use '../../styles.scss' as c;
 
 article {
+    position: relative;
+
+    padding: c.$PADDING;
     margin-top: 4em;
     min-height: calc(100% - 4em);
+
+    section {
+        display: flex;
+        flex-direction: column;
+        // min-height: calc(100vh - 8em);
+
+        
+        h2 {
+            font-weight: normal;
+            font-size: 2em;
+            padding: 2em 0 2em 0;
+            margin: 0;
+        }
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: .5em;
+
+            width: 17.5em;
+            padding: .5em 1em;
+            font-size: 1em;
+
+            background: transparent;
+            color: c.$COLOR;
+            font-weight: bold;
+
+            border: 2px solid c.$COLOR_TRSP;
+            border-radius: 1.45em;
+
+            cursor: pointer;
+
+            img {
+                width: 18px;
+                height: 18px;
+            }
+
+            &:nth-of-type(n):not(:last-of-type) {
+                margin-bottom: 1em;
+            }
+        }
+        
+        p {
+            padding-top: 6em;
+            
+            font-weight: bold;
+            color: c.$COLOR_TRSP;
+        }
+        
+    }
 }
