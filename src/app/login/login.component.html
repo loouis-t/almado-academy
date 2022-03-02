@@ -13,12 +13,12 @@
     </section>
 
     <section *ngIf="isLoggedin == true">
-        <h2>Bonjour {{ socialUser.name }},</h2>
+        <h2>Bonjour {{ session.name }},</h2>
 
         <p>
-            Token : {{ socialUser.idToken || socialUser.authToken }}
+            Token : {{ session.token }}
             <br>
-            mail: {{ socialUser.email }}
+            mail: {{ session.email }}
         </p>
 
         <button type="button" (click)="logOut()">Se déconnecter</button>
