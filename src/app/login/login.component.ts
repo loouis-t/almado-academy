@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   // required variables
   public userDetails: any;
   logged?: boolean = false;
+  commandes = commandes;
 
   constructor(
     private authService: SocialAuthService
@@ -29,13 +30,10 @@ export class LoginComponent implements OnInit {
 
   // required functions
   signInHandler(service: string): void {
-
     switch (service) {
       case "google":
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
           .then((data) => {
-            console.log("connexion ok");
-            
             if (data.idToken != null) {
               
               localStorage.setItem('auth', JSON.stringify(data));
@@ -46,24 +44,24 @@ export class LoginComponent implements OnInit {
             }
           });
         break;
-      
-        case "facebook":
-          this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
-            .then((data) => {
-              if (data.authToken != null) {
-                localStorage.setItem('auth', JSON.stringify(data));
-                this.logged = true;
-                this.handleUser();  // handle right after connection
-              } else {
-                console.log("Erreur de connexion.  [authToken=null]");
-              }
-            })
-          break;
 
-        default:
-          console.log("Aucun service sécifié.");
-          break;
-      };
+      case "facebook":
+        this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
+          .then((data) => {
+            if (data.authToken != null) {
+              localStorage.setItem('auth', JSON.stringify(data));
+              this.logged = true;
+              this.handleUser();  // handle right after connection
+            } else {
+              console.log("Erreur de connexion.  [authToken=null]");
+            }
+          })
+        break;
+
+      default:
+        console.log("Aucun service sécifié.");
+        break;
+    };
   }
 
   signOut(): void {
@@ -71,7 +69,7 @@ export class LoginComponent implements OnInit {
     this.logged = false;
     this.authService.signOut(true)
       .then(() => {
-        console.log("déconnecté");
+        console.log("Déconnecté");
       })
       .catch(() => {
         console.log("Aucun utilisateur connecté");
@@ -85,78 +83,22 @@ export class LoginComponent implements OnInit {
     if (storage) {
       this.userDetails = JSON.parse(storage);
       this.logged = true;
-      console.log("storage ok");
     }
   }
 }
 
-// const googleLoginOptions = {
-//   scope: 'email'
-// };
+export interface commande {
+  type: String;
+  date: String;
+}
 
-  // // loginForm: FormGroup;
-  // socialUser!: SocialUser;
-  // isLoggedin: boolean = false;
-  // session: any;
-  
-  // constructor(
-  //   // private formBuilder: FormBuilder,
-  //   private socialAuthService: SocialAuthService
-  // ) { }
-  
-  // ngOnInit(): void {
-  //   // this.loginForm = this.formBuilder.group({
-  //   //   email: ['', Validators.required],
-  //   //   password: ['', Validators.required],
-  //   // });
-
-  //   this.socialAuthService.authState.subscribe((user) => {
-  //     console.log("Etape 1");
-
-  //     this.socialUser = user;
-  //     this.isLoggedin = (user != null);
-      
-  //     // if (this.socialUser != null) {
-  //     //   localStorage.setItem('currentUser', this.socialUser.name);
-  //     //   localStorage.setItem('currentToken', this.socialUser.idToken);
-  //     //   localStorage.setItem('currentEmail', this.socialUser.email);
-
-  //     // } else {
-  //     //   localStorage.setItem('currentUser', '');
-  //     //   localStorage.setItem('currentToken', '');
-  //     //   localStorage.setItem('currentEmail', '');
-  //     // }
-  //   });
-
-  //   this.session = { 
-  //     'name': localStorage.getItem('currentUser'),
-  //     'token': localStorage.getItem('currentToken'),
-  //     'email': localStorage.getItem('currentEmail')
-  //   }
-
-  //   this.isLoggedin = localStorage.getItem('currentUser') != null;
-  // }
-
-
-  
-  // loginWithGoogle(): void {
-  //   this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID/*, googleLoginOptions*/);
-
-  //   console.log("Etape 0");
-  // }
-
-  // loginWithFB(): void {
-  //   this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  // }
-
-  // logOut(): void {
-  //   this.socialAuthService.signOut();
-
-  //   // this.socialUser = new SocialUser; // reset social user
-  // }
-
-  // refreshToken(): void {
-  //   this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
-  // }
-
-  
+export const commandes = [
+  {
+    type: "Coaching personnalisé",
+    date: "14-09-2002"
+  },
+  {
+    type: "Réglage voiture",
+    date: "12-07-2002"
+  }
+]

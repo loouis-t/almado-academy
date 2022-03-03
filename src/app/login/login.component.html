@@ -1,34 +1,35 @@
 <article>
-    <section *ngIf="logged == false">
-        <h2>Connexion</h2>
-    
-        <button type="button" class="google-signin" (click)="signInHandler('google')">
-            <img src="https://img.icons8.com/color/48/000000/google-logo.png"/>
-            Continuer avec Google
-        </button>
-        <button type="button" class="fb-signin" (click)="signInHandler('facebook')">
-            <img src="https://img.icons8.com/fluency/48/000000/facebook-new.png"/>
-            Continuer avec Facebook
-        </button>
-        <!-- <button type="button" class="fb-signin" (click)="signOut()">
-            Se déconnecter
-        </button> -->
+    <section *ngIf="logged == false" class="not-connected">
+        <div class="connexion">
+            <h2>Connexion</h2>
+            
+            <button type="button" class="google-signin" (click)="signInHandler('google')">
+                <img src="https://img.icons8.com/color/48/000000/google-logo.png"/>
+                Continuer avec Google
+            </button>
+            <button type="button" class="fb-signin" (click)="signInHandler('facebook')">
+                <img src="https://img.icons8.com/fluency/48/000000/facebook-new.png"/>
+                Continuer avec Facebook
+            </button>
+        </div>
+        <div class="decoration"></div>
     </section>
 
-    <section *ngIf="logged == true">
-        <h2>Bonjour {{ userDetails.name || "" }},</h2>
+    <section *ngIf="logged == true" class="connected">
+        <h2>Bonjour <span>{{ userDetails.name || "" }}</span>,</h2>
 
         <h3>Vos commandes :</h3>
         <table>
-            <tr>
-                <td>Type</td>
-                <td>Date</td>
-            </tr>
-            <tr>
-                <td>Coaching</td>
-                <td>14/09/2002</td>
+            <thead>
+                <td>Commande(s)</td>
+                <td>Date de commande</td>
+            </thead>
+            <tr *ngFor="let commande of commandes">
+                <td>{{ commande.type }}</td>
+                <td>{{ commande.date }}</td>
             </tr>
         </table>
-        <button type="button" (click)="signOut()">Se déconnecter</button>
+
+        <button class="deconnexion" type="button" (click)="signOut()">Se déconnecter</button>
     </section>
 </article>

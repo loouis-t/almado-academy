@@ -3,14 +3,16 @@
 article {
     position: relative;
 
-    padding: c.$PADDING;
+    // padding: c.$PADDING;
     margin-top: 4em;
-    min-height: calc(100% - 4em);
+    // min-height: calc(100vh - 4em);
 
     section {
+        position: relative;     // pour position .deconnexion
+
         display: flex;
         flex-direction: column;
-        // min-height: calc(100vh - 8em);
+        min-height: calc(100vh - 4em);
 
         
         h2 {
@@ -18,6 +20,12 @@ article {
             font-size: 2em;
             padding: 2em 0 2em 0;
             margin: 0;
+
+            span {
+                background-clip: text;
+                color: transparent;
+                background-image: linear-gradient(45deg,#0a5ac2 30%,#7da6cf,#024397 70%);
+            }
         }
 
         button {
@@ -26,9 +34,9 @@ article {
             align-items: center;
             column-gap: .5em;
 
-            width: 17.5em;
+            width: 20em;
             padding: .5em 1em;
-            font-size: 1em;
+            font-size: .9em;
 
             background: transparent;
             color: c.$COLOR;
@@ -50,10 +58,101 @@ article {
         }
 
         table {
-            td, tr {
-                border: 1px solid white;
+            position: relative;
+            
+            width: 100%;
+            margin: 0 0 3em 0;
+
+            background: c.$COLOR;
+
+            thead {
+                font-weight: bold;
+            }
+
+            td {
+                padding: .5em;
+                background: c.$BACKGROUND;
+
+                &:first-of-type {
+                    width: 70%;
+                }
+
+                &:last-of-type {
+                    width: 30%;
+                }
+            }
+
+            tr {
+                color: c.$COLOR_TRSP;
             }
         }
         
+        p {
+            display: flex;
+            column-gap: 1em;
+
+            span {
+                &:first-of-type {
+                    width: 10em;
+                }
+                &:last-of-type {
+                    font-style: italic;
+                }
+            }
+        }
+
+        .deconnexion {
+            position: absolute;
+            bottom: 2em; left: 0;
+        }
+    }
+
+    .not-connected {
+        flex-direction: row;
+        justify-content: flex-end;
+
+
+        .connexion {
+            position: absolute;
+            top: 50%; left: 20%;
+            transform: translate(-50%, -50%);
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            width: fit-content;
+            height: fit-content;
+
+            z-index: 1;
+
+            h2 {
+                padding: 0 0 1em 0;
+                width: 100%;
+            }
+        }
+
+        .decoration {
+            position: relative;
+            width: 60%;
+            border-left: 1px solid c.$COLOR_TRSP;
+
+
+            &::before {
+                content: "";
+                position: absolute;
+                width: 100%; height: 100%;
+                background: url('../../assets/volant_lmp3.png') no-repeat;
+                background-size: 200%;
+                background-position: 40% 30%;
+
+                opacity: .3;
+            }
+        }
+    }
+
+    .connected {
+        padding: c.$PADDING;
     }
 }
