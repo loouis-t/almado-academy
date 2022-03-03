@@ -48,12 +48,11 @@ article {
                 margin-bottom: 1em;
             }
         }
-        
-        p {
-            padding-top: 6em;
-            
-            font-weight: bold;
-            color: c.$COLOR_TRSP;
+
+        table {
+            td, tr {
+                border: 1px solid white;
+            }
         }
         
     }

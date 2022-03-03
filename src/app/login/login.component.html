@@ -1,26 +1,34 @@
 <article>
-    <section *ngIf="isLoggedin == false">
+    <section *ngIf="logged == false">
         <h2>Connexion</h2>
     
-        <button type="button" class="google-signin" (click)="loginWithGoogle()">
+        <button type="button" class="google-signin" (click)="signInHandler('google')">
             <img src="https://img.icons8.com/color/48/000000/google-logo.png"/>
             Continuer avec Google
         </button>
-        <button type="button" class="fb-signin" (click)="loginWithFB()">
+        <button type="button" class="fb-signin" (click)="signInHandler('facebook')">
             <img src="https://img.icons8.com/fluency/48/000000/facebook-new.png"/>
             Continuer avec Facebook
         </button>
+        <!-- <button type="button" class="fb-signin" (click)="signOut()">
+            Se déconnecter
+        </button> -->
     </section>
 
-    <section *ngIf="isLoggedin == true">
-        <h2>Bonjour {{ session.name }},</h2>
+    <section *ngIf="logged == true">
+        <h2>Bonjour {{ userDetails.name || "" }},</h2>
 
-        <p>
-            Token : {{ session.token }}
-            <br>
-            mail: {{ session.email }}
-        </p>
-
-        <button type="button" (click)="logOut()">Se déconnecter</button>
+        <h3>Vos commandes :</h3>
+        <table>
+            <tr>
+                <td>Type</td>
+                <td>Date</td>
+            </tr>
+            <tr>
+                <td>Coaching</td>
+                <td>14/09/2002</td>
+            </tr>
+        </table>
+        <button type="button" (click)="signOut()">Se déconnecter</button>
     </section>
 </article>
