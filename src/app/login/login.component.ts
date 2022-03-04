@@ -68,12 +68,6 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('auth');
     this.logged = false;
     this.authService.signOut(true)
-      .then(() => {
-        console.log("Déconnecté");
-      })
-      .catch(() => {
-        console.log("Aucun utilisateur connecté");
-      });
   }
 
 

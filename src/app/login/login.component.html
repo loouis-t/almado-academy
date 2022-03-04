@@ -2,7 +2,6 @@
     <section *ngIf="logged == false" class="not-connected">
         <div class="connexion">
             <h2>Connexion</h2>
-            
             <button type="button" class="google-signin" (click)="signInHandler('google')">
                 <img src="https://img.icons8.com/color/48/000000/google-logo.png"/>
                 Continuer avec Google
@@ -11,8 +10,11 @@
                 <img src="https://img.icons8.com/fluency/48/000000/facebook-new.png"/>
                 Continuer avec Facebook
             </button>
+            
+            <hr>
+            <button class="go-back" onclick="location.href='/'">Retourner à l'accueil</button>
         </div>
-        <div class="decoration"></div>
+        <p class="decoration">Almado <br> <span>Academy</span></p>
     </section>
 
     <section *ngIf="logged == true" class="connected">
