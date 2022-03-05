@@ -26,7 +26,7 @@ article {
         padding: 2em;
         margin-bottom: 4em;
 
-        border: 1px solid rgba(255, 255, 255, 0.25);
+        border: 1px solid rgba(255, 255, 255, .75);
         border-radius: 1em;
         box-shadow: inset rgba(10, 90, 194, .75) 0 0 12px 0px, rgba(10, 90, 194, .75) 0 0 12px 0px;
 
@@ -40,7 +40,7 @@ article {
             }
 
             &:last-of-type {
-                margin-bottom: 4em;
+                margin-bottom: 2em;
             }
         }
     }
