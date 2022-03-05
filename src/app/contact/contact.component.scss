@@ -45,9 +45,11 @@
 
                 h2 {
                     padding: 0 0 0 20%;
-                    font-weight: normal;
+
                     font-size: 4em;
-                    color: white;
+                    font-family: 'Roboto Serif', sans-serif;
+                    color: c.$COLOR_TRSP;
+
                     z-index: 1;
                 }
             }

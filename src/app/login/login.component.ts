@@ -98,22 +98,31 @@ export class LoginComponent implements OnInit {
           this.http.get('/api/formations_ligne/'+thisClientToken).subscribe({
             next: data => {
               this.formations_ligne = data;
+            },
+            error: error => {
+              console.log("Aucune commande de formation en ligne");
             }
           });
           this.http.get('/api/coachings/'+thisClientToken).subscribe({
             next: data => {
               this.coachings = data;
+            },
+            error: error => {
+              console.log("Aucune commande de coaching");
             }
           });
           this.http.get('/api/reglages/'+thisClientToken).subscribe({
             next: data => {
               this.reglages = data;
+            },
+            error: error => {
+              console.log("Aucune commande de réglage");
             }
           });
         },
         error: () => {
           // Si pas dans la base : ON L'AJOUTE
-          this.http.post<any>('/api', {
+          this.http.post<any>('/api/clients/', {
               "nom_complet": this.userDetails.name,
               "token": thisClientToken,
               "mail": this.userDetails.email,
@@ -121,6 +130,8 @@ export class LoginComponent implements OnInit {
           }).subscribe({
             next: data => {
               this.postId = data.id;
+              console.log(data.id);
+              
             },
             error: error => {
               console.error('Il y a eu une erreur!', error);

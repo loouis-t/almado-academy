@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-coaching',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoachingComponent implements OnInit {
 
-  constructor() { }
+  date!: Date;
+
+  constructor(
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  pay(): void {
   }
 
 }

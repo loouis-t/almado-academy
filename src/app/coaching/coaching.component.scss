@@ -56,11 +56,10 @@ article {
         text-decoration: none;
 
         box-sizing: padding-box;
-        border-radius: 10rem;
+        border-radius: 1em;
         background: rgb(255, 255, 255, .9);
-
-        cursor: pointer;
         
+
         &::before {
             content: "";
             position: absolute;
