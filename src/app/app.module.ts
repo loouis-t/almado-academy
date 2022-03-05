@@ -22,6 +22,7 @@ import { ActualitesComponent } from './actualites/actualites.component';
 import { AproposComponent } from './apropos/apropos.component';
 import { EnconstructionComponent } from './en-construction/enconstruction.component';
 import { LoginComponent } from './login/login.component';
+import { CoachingComponent } from './coaching/coaching.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LoginComponent } from './login/login.component';
     ActualitesComponent,
     AproposComponent,
     EnconstructionComponent,
-    LoginComponent
+    LoginComponent,
+    CoachingComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,7 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule,
     AppRoutingModule,
     RouterModule.forRoot([
+      { path: 'produits/coaching', component: CoachingComponent },
       { path: 'login', component: LoginComponent },
       { path: 'actu', component: EnconstructionComponent },
       { path: 'apropos', component: EnconstructionComponent },
