@@ -57,13 +57,20 @@ article {
             width: calc((60vw) / 3);
             min-height: calc(16 * ((60vw) / 27)); // min: 16:9
 
-            border: 2px solid;
-            border-image-slice: 1;
-            border-image-source: c.$TEXT_GRADIENT;
+            // border: 2px solid;
+            // border-image-slice: 1;
+            // border-image-source: c.$TEXT_GRADIENT;
 
             // border: 2px solid c.$HEADER_GREY;
             // background: rgb(58, 58, 59);
             // border-radius: 1em;
+
+            border-radius: 1em;
+            border: 1px solid rgba(255, 255, 255, .75);
+            
+            &:nth-of-type(2) {
+                box-shadow: inset rgba(10, 90, 194, .75) 0 0 12px 0px, rgba(10, 90, 194, .75) 0 0 12px 0px;
+            }
             
 
             &:first-of-type, &:last-of-type {
@@ -87,7 +94,9 @@ article {
                     padding-top: 1em;
 
                     .pad {
-                        padding: .25em 1em;
+                        padding: .25em 0em;
+                        margin: 0 0 0 2em;
+                        list-style: initial;
                     }
                 }
             }

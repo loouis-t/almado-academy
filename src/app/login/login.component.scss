@@ -78,7 +78,7 @@ article {
                     width: 70%;
                 }
 
-                &:last-of-type {
+                &:nth-of-type(2) {
                     width: 30%;
                 }
             }
@@ -183,9 +183,15 @@ article {
     .connected {
         padding: c.$PADDING;
         
+
+        .assistance {
+            margin: 0;
+            display: block;
+            color: c.$COLOR_TRSP;
+        }
+
         .deconnexion {
-            position: absolute;
-            bottom: 2em; left: 20vw;
+            margin: 2em 0;
         }
     }
 }

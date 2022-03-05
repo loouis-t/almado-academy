@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { 
   SocialLoginModule,
@@ -35,6 +36,7 @@ import { LoginComponent } from './login/login.component';
   imports: [
     BrowserModule,
     SocialLoginModule,
+    HttpClientModule,
     AppRoutingModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
