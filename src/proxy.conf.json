@@ -5,5 +5,12 @@
         "pathRewrite": {
             "^/api" : ""
         }
+    },
+    "/CA": {
+        "target": "https://recette-tpeweb.e-transactions.fr/php/",
+        "secure": false,
+        "pathRewrite": {
+            "^/CA" : ""
+        }
     }
 }
