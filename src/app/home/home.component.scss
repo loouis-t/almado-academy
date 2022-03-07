@@ -4,10 +4,10 @@ article {
     position: relative;
     display: flex;
     flex-direction: column;
-    // justify-content: center;
 
-    margin: 4em 0 0 0;
-    padding: 0 17.5vw 4em 17.5vw;
+    // margin: 4em 0 0 0;
+    margin: 0;
+    padding: 4em 17.5vw 4em 17.5vw;
     // min-height: calc(100vh - 4em);
     min-height: 100vh;
 
@@ -19,7 +19,7 @@ article {
         background: url('../../assets/gt7.jpg') no-repeat;
         background-position: 50% 50%;
         object-fit: cover;
-        opacity: .75;
+        opacity: .5;
         z-index: -1;
     }
 
@@ -39,12 +39,14 @@ article {
     }
 
     h1 {
+        position: relative;
         font-weight: normal;
         font-size: 2rem;
 
-        margin: 1.5em 0;
+        width: max-content;
+        margin: 1.25em 0;
 
-        text-shadow: rgba(10, 90, 194, .75) 0px 0px 12px;
+        text-shadow: rgba(10, 90, 194, .75) 0px 0px 20px;
 
         span {
             background-clip: text;
