@@ -22,10 +22,6 @@ export class CoachingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.form = document.querySelector('#pay')!;
-    this.form.onsubmit = () => {
-      this.pay();
-    }
   }
 
   pay(): void {
@@ -39,8 +35,11 @@ export class CoachingComponent implements OnInit {
     }).subscribe({
       next: data => {
         this.hmac = data['cle'];
-        console.log(this.form);
-        
+        console.log(this.hmac);
+        this.form = document.querySelector('#pay')!;
+        setTimeout(() => {
+          this.form.submit();
+        }, 250);
         
 
       },
