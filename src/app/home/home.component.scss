@@ -4,11 +4,9 @@ article {
     position: relative;
     display: flex;
     flex-direction: column;
-
-    // margin: 4em 0 0 0;
+    
     margin: 0;
     padding: 4em 17.5vw 4em 17.5vw;
-    // min-height: calc(100vh - 4em);
     min-height: 100vh;
 
     &::before {
@@ -46,12 +44,12 @@ article {
         width: max-content;
         margin: 1.25em 0;
 
-        text-shadow: rgba(10, 90, 194, .75) 0px 0px 20px;
-
         span {
-            background-clip: text;
-            color: transparent;
-            background-image: linear-gradient(45deg,#0a5ac2 30%,#7da6cf,#024397 70%);
+            font-weight: 100;
+            color: rgba(255, 255, 255, .75);
+            text-shadow: c.$TEXT_SHADOW;
+
+            animation: 10s flash infinite;
         }
     }
 
@@ -78,7 +76,7 @@ article {
             border: 1px solid rgba(255, 255, 255, .75);
             
             &:nth-of-type(2) {
-                box-shadow: inset rgba(10, 90, 194, .75) 0 0 12px 0px, rgba(10, 90, 194, .75) 0 0 12px 0px;
+                box-shadow: c.$BOX_SHADOW;
             }
             
 
@@ -145,7 +143,7 @@ article {
                         text-decoration: none;
                         
                         position: relative;
-                        background: rgb(255, 255, 255, .9);
+                        background: rgba(255, 255, 255, .9);
                         box-sizing: padding-box;
                         
                         &::before {
@@ -208,5 +206,45 @@ article {
                 }
             }
         }
+    }
+}
+
+
+@keyframes flash {
+    0% {
+        color: c.$NEON_TRSP;
+        text-shadow: c.$TEXT_SHADOW;
+    }
+    39% {
+        color: c.$NEON_TRSP;
+        text-shadow: c.$TEXT_SHADOW;
+    }
+    40% {
+        color: rgba(255, 255, 255, .2);
+        text-shadow: none;
+    }
+    41% {
+        color: c.$NEON_TRSP;
+        text-shadow: c.$TEXT_SHADOW;
+    }
+    69% {
+        color: c.$NEON_TRSP;
+        text-shadow: c.$TEXT_SHADOW;
+    }
+    70% {
+        color: rgba(255, 255, 255, .2);
+        text-shadow: none;
+    }
+    71% {
+        color: c.$NEON_TRSP;
+        text-shadow: c.$TEXT_SHADOW;
+    }
+    72% {
+        color: rgba(255, 255, 255, .2);
+        text-shadow: none;
+    }
+    73% {
+        color: c.$NEON_TRSP;
+        text-shadow: c.$TEXT_SHADOW;
     }
 }

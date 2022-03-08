@@ -23,6 +23,7 @@ import { AproposComponent } from './apropos/apropos.component';
 import { EnconstructionComponent } from './en-construction/enconstruction.component';
 import { LoginComponent } from './login/login.component';
 import { CoachingComponent } from './coaching/coaching.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CoachingComponent } from './coaching/coaching.component';
     AproposComponent,
     EnconstructionComponent,
     LoginComponent,
-    CoachingComponent
+    CoachingComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,7 @@ import { CoachingComponent } from './coaching/coaching.component';
     AppRoutingModule,
     RouterModule.forRoot([
       { path: 'produits/coaching', component: CoachingComponent },
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'login', component: LoginComponent },
       { path: 'actu', component: EnconstructionComponent },
       { path: 'apropos', component: EnconstructionComponent },

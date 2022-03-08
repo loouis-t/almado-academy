@@ -4,7 +4,7 @@
     article {
         position: relative;
 
-        min-height: calc(100% - 4em);
+        min-height: 100% ;
         width: 100%;
 
         a {
@@ -17,8 +17,8 @@
             &:first-of-type {
 
                 width: 100%;
-                min-height: 30vh;
-                margin: 4em 0 0 0;
+                min-height: calc(30vh + 4em);
+                margin: 0;
 
                 display: flex;
                 justify-content: flex-start;
@@ -38,17 +38,16 @@
                     background: url('../../assets/nom_sur_lmp3.png') no-repeat;
                     background-size: 100%;
                     background-position: 0 65%;
-                    opacity: .3;
+                    opacity: .2;
                     
                     z-index: 0;
                 }
 
                 h2 {
                     padding: 0 0 0 20%;
+                    font-weight: normal;
 
                     font-size: 4em;
-                    font-family: 'Roboto Serif', sans-serif;
-                    color: c.$COLOR_TRSP;
 
                     z-index: 1;
                 }

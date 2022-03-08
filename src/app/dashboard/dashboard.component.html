@@ -1,0 +1,38 @@
+<article>
+    <h2>Bonjour <span>{{ userDetails.name || "" }}</span>,</h2>
+
+        <h3>Vos commandes :</h3>
+        <table>
+            <thead>
+                <td>Commande(s)</td>
+                <td>Date de commande</td>
+                <td>Prix</td>
+            </thead>
+            <tr *ngFor="let formation of formations_ligne">
+                <td>Formation en ligne</td>
+                <td>{{ formation.date }}</td>
+                <td>30€</td>
+            </tr>
+            <tr *ngFor="let coaching of coachings">
+                <td>Coaching personnalisé</td>
+                <td>{{ coaching.date }}</td>
+                <td>25€</td>
+            </tr>
+            <tr *ngFor="let reglage of reglages">
+                <td>Réglage automobile</td>
+                <td>{{ reglage.date }}</td>
+                <td>10€</td>
+            </tr>
+        </table>
+
+        <h3>Informations d'assistance technique :</h3>
+        <p class="assistance">
+            <u>Id client :</u> {{ userDetails.id }}
+            <br>
+            <u>Mail :</u> {{ userDetails.email }}
+            <br>
+            <u>Type de connexion :</u> {{ type_connexion }}
+        </p>
+
+        <button class="deconnexion" type="button" (click)="signOut()">Se déconnecter</button>
+</article>

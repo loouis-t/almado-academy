@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import * as crypto from 'crypto-js';
 
 // import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -18,7 +19,6 @@ export class LoginComponent implements OnInit {
 
   // required variables
   public userDetails: any;
-  logged?: boolean = false;
   public type_connexion: string = "E";
   postId!: any;
 
@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: SocialAuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +46,6 @@ export class LoginComponent implements OnInit {
           .then((data) => {
             if (data.idToken != null) {
               localStorage.setItem('auth', JSON.stringify(data));
-              this.logged = true;
               localStorage.setItem('connectionType', "G");
               this.handleUser();  // handle right after connection
             } else {
@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit {
           .then((data) => {
             if (data.authToken != null) {
               localStorage.setItem('auth', JSON.stringify(data));
-              this.logged = true;
               localStorage.setItem('connectionType', "F");
               this.handleUser();  // handle right after connection
             } else {
@@ -76,7 +75,6 @@ export class LoginComponent implements OnInit {
 
   signOut(): void {
     localStorage.removeItem('auth');
-    this.logged = false;
     this.authService.signOut(true)
   }
 
@@ -88,37 +86,12 @@ export class LoginComponent implements OnInit {
       // Gérer session courante
       this.userDetails = JSON.parse(storage);
       this.type_connexion = localStorage.getItem('connectionType')!;
-      this.logged = true;
 
       // Gérer ajout en base
       let thisClientToken = crypto.SHA256(this.type_connexion + this.userDetails.name + this.userDetails.mail + this.userDetails.id).toString(crypto.enc.Hex);
       this.http.get('/api/clients/'+thisClientToken).subscribe({
         next: data => {
-          // Si déjà dans la base : NE RIEN FAIRE (chercher commandes)
-          this.http.get('/api/formations_ligne/'+thisClientToken).subscribe({
-            next: data => {
-              this.formations_ligne = data;
-            },
-            error: error => {
-              console.log("Aucune commande de formation en ligne");
-            }
-          });
-          this.http.get('/api/coachings/'+thisClientToken).subscribe({
-            next: data => {
-              this.coachings = data;
-            },
-            error: error => {
-              console.log("Aucune commande de coaching");
-            }
-          });
-          this.http.get('/api/reglages/'+thisClientToken).subscribe({
-            next: data => {
-              this.reglages = data;
-            },
-            error: error => {
-              console.log("Aucune commande de réglage");
-            }
-          });
+          // Si déjà dans la base : NE RIEN FAIRE
         },
         error: () => {
           // Si pas dans la base : ON L'AJOUTE
@@ -131,7 +104,6 @@ export class LoginComponent implements OnInit {
             next: data => {
               this.postId = data.id;
               console.log(data.id);
-              
             },
             error: error => {
               console.error('Il y a eu une erreur!', error);
@@ -139,6 +111,7 @@ export class LoginComponent implements OnInit {
           });
         }
       });
+      this.router.navigate(['dashboard']);
       
 
     }

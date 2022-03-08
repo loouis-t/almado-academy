@@ -2,44 +2,58 @@
 
 article {
     position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100vh;
+    padding: c.$PADDING;
+    padding-top: 4em;
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%; height: 100%;
+        left: 0; top: 0;
+
+        background: url('../../assets/gt7.jpg') no-repeat;
+        background-position: 50% 50%;
+        object-fit: cover;
+        opacity: .5;
+        z-index: -1;
+    }
+
+    h2 {
+        font-weight: normal;
+        font-size: 2rem;
+        padding: 1.25em 0;
+        margin: 0;
+    }
     
-    margin-top: 4em;
-
-    section {
-        position: relative;     // pour position .deconnexion
-
-        display: flex;
-        flex-direction: column;
-        min-height: calc(100vh - 4em);
-
+    .neon {
+        padding: 2em;
+        margin-top: 10vh;
+        width: max-content;
         
-        h2 {
-            font-weight: normal;
-            font-size: 2em;
-            padding: 2em 0;
-            margin: 0;
+        align-self: center;
 
-            span {
-                background-clip: text;
-                color: transparent;
-                background-image: linear-gradient(45deg,#0a5ac2 30%,#7da6cf,#024397 70%);
-            }
-        }
+        border: 1px solid c.$NEON_TRSP;
+        border-radius: 1em;
+        box-shadow: c.$BOX_SHADOW;
 
         button {
             display: flex;
-            justify-content: center;
             align-items: center;
-            column-gap: .5em;
+            justify-content: center;
 
             width: 20vw;
             padding: .5em 1em;
-            font-size: 1em;
-
-            background: transparent;
+            
             color: c.$COLOR;
+            font-size: 1em;
             font-weight: bold;
-
+            
+            background: transparent;
             border: 2px solid c.$COLOR_TRSP;
             border-radius: 1.45em;
 
@@ -58,140 +72,26 @@ article {
             }
         }
 
-        table {
+        hr {
+            align-self: center;
             position: relative;
-            
-            width: 100%;
-            margin: 0 0 3em 0;
+            margin: 2em .5vw;
+            width: 19vw;
 
-            background: c.$COLOR;
-
-            thead {
-                font-weight: bold;
-            }
-
-            td {
-                padding: .5em;
-                background: c.$BACKGROUND;
-
-                &:first-of-type {
-                    width: 70%;
-                }
-
-                &:nth-of-type(2) {
-                    width: 30%;
-                }
-            }
-
-            tr {
-                color: c.$COLOR_TRSP;
-            }
-        }
-        
-        p {
-            display: flex;
-            column-gap: 1em;
-
-            span {
-                &:first-of-type {
-                    width: 10em;
-                }
-                &:last-of-type {
-                    font-style: italic;
-                }
-            }
-        }
-    }
-
-    .not-connected {
-        flex-direction: row;
-        
-        .connexion {
-            padding: 0 8em;
-
-            .buttons {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                
-                width: 20rem;
-                height: calc(100vh - 30em);
-            }
-
-            hr {
-                align-self: center;
-                position: relative;
-                margin: 2em .5vw;
-                width: 19vw;
-
-                border-bottom: 1px solid c.$COLOR_TRSP;
-
-                &::before {
-                    content: "ou";
-                    position: absolute;
-                    top: 0; left: 50%;
-                    padding: 0 .25em;
-
-                    font-weight: bold;
-                    color: c.$COLOR_TRSP;
-                    background: black;
-
-                    transform: translate(-50%, -50%);
-                }
-            }
-        }
-
-        .decoration {
-            position: relative;
-            
-            width: 100%;
-            padding: 0 2rem;
-            margin: 0;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            // align-items: flex-end;
-
-            font-size: 7.5vw;
-            
-            letter-spacing: 1vw;
-            
-            border-left: 1px solid c.$COLOR_TRSP;
-
-            font-weight: bold;
-            font-family: 'Roboto Serif', sans-serif;
-
-            span {
-                font-style: normal;
-            }
+            border-bottom: 1px solid c.$COLOR_TRSP;
 
             &::before {
-                content: "";
+                content: "ou";
                 position: absolute;
-                width: 100%; height: 100%;
-                left: 0; top: 0;
-                background: url('../../assets/volant_lmp3.png') no-repeat;
-                background-size: 200%;
-                background-position: 40% 30%;
+                top: 0; left: 50%;
+                padding: 0 .25em;
 
-                opacity: .3;
+                font-weight: bold;
+                color: c.$COLOR_TRSP;
+                background: black;
+
+                transform: translate(-50%, -50%);
             }
-        }
-    }
-
-    .connected {
-        padding: c.$PADDING;
-        
-
-        .assistance {
-            margin: 0;
-            display: block;
-            color: c.$COLOR_TRSP;
-        }
-
-        .deconnexion {
-            margin: 2em 0;
         }
     }
 }
