@@ -231,7 +231,8 @@
 
             transition: background-color .25s ease-in-out;
 
-            background-color: c.$HEADER_GREY;
+            // background-color: c.$HEADER_GREY;
+            background: transparentize($color: #1f2122, $amount: .5);
             z-index: 2;
             
             #burger {
@@ -353,8 +354,6 @@
             .lien {
                 width: calc(100% - 2em);
                 padding: 2em 0 0 0 ;
-
-                // font-size: 1.2em;
         
                 border-bottom: 1px solid rgba(255, 255, 255, c.$TEXT_OPACITY);
             }
@@ -393,12 +392,10 @@
 
 
 
-
-
     .mobile:not(header) {
         display: flex;
         flex-direction: column;
-        padding: c.$PADDING_MOBILE;
+        padding: 0 10vw;
 
         background: c.$HEADER_GREY;
 

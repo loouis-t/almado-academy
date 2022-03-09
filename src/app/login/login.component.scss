@@ -95,3 +95,46 @@ article {
         }
     }
 }
+
+@media screen and (max-width: 768px) {
+    article {
+        padding: c.$PADDING_MOBILE;
+        padding-top: 4em;
+    
+        h2 {
+            font-size: 2rem;
+        }
+        
+        .neon {
+            padding: 1em;
+            margin-top: 10vh;
+    
+            border: 1px solid c.$NEON_TRSP;
+            border-radius: 1em;
+            box-shadow: c.$BOX_SHADOW;
+    
+            button {
+                width: calc(70vw - 2em);
+                font-size: .9em;
+            }
+    
+            hr {
+                margin: 2em 1vw;
+                width: 58vw;
+    
+                &::before {
+                    content: "ou";
+                    position: absolute;
+                    top: 0; left: 50%;
+                    padding: 0 .25em;
+    
+                    font-weight: bold;
+                    color: c.$COLOR_TRSP;
+                    background: black;
+    
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+    }
+}

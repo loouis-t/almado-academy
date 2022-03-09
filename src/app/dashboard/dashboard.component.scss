@@ -105,3 +105,28 @@ article {
         cursor: pointer;
     }
 }
+
+@media screen and (max-width: 768px) {
+    article {
+        padding: c.$PADDING_MOBILE;
+        padding-top: 5em;
+    
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            font-weight: .9em;
+        }
+
+        table {
+            font-size: .8em;
+        }
+    
+        .deconnexion {
+            width: max-content;
+            padding: .5em 2em;
+        }
+    }
+    
+}
