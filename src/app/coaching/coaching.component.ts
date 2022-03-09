@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-coaching',
@@ -8,11 +7,10 @@ import { delay } from 'rxjs';
   styleUrls: ['./coaching.component.scss']
 })
 export class CoachingComponent implements OnInit {
-  
-  montant: string = "2500"; // changer le moyen d'appeler le montant !!
-  ref: string = "abc";
+  ref: string = "almado-ac-coaching";
   mail: string = "essai@gmail.com";
   dateTime!: string;
+  montant!: string;
   hmac!: string;
   
   form!: HTMLFormElement;
@@ -25,17 +23,16 @@ export class CoachingComponent implements OnInit {
   }
 
   pay(): void {
-    this.dateTime = this.toIsoString(new Date());
-
     this.http.post<any>('/api/paiement/', {
-      montant: this.montant,
       ref: this.ref,
-      mail: this.mail,
-      dateTime: this.dateTime
+      mail: this.mail
     }).subscribe({
       next: data => {
         this.hmac = data['cle'];
-        console.log(this.hmac);
+        this.dateTime = data['date'];
+        this.montant = data['montant'];
+
+        // submit
         this.form = document.querySelector('#pay')!;
         setTimeout(() => {
           this.form.submit();
@@ -48,24 +45,4 @@ export class CoachingComponent implements OnInit {
       }
     });
   }
-
-
-  // Formater la date
-  toIsoString(date: Date) {
-    var tzo = -date.getTimezoneOffset(),
-        dif = tzo >= 0 ? '+' : '-',
-        pad = function(num: any) {
-            return (num < 10 ? '0' : '') + num;
-        };
-  
-    return date.getFullYear() +
-        '-' + pad(date.getMonth() + 1) +
-        '-' + pad(date.getDate()) +
-        'T' + pad(date.getHours()) +
-        ':' + pad(date.getMinutes()) +
-        ':' + pad(date.getSeconds()) +
-        dif + pad(Math.floor(Math.abs(tzo) / 60)) +
-        ':' + pad(Math.abs(tzo) % 60);
-  }
-
 }

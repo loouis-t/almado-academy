@@ -37,19 +37,18 @@ article {
         font-size: 1.1em;
         
         padding: 2em;
-        // margin-bottom: 4em;
 
-        border: 1px solid rgba(255, 255, 255, .75);
+        border: 1px solid c.$NEON_TRSP;
         border-radius: 1em;
-        box-shadow: inset rgba(10, 90, 194, .75) 0 0 12px 0px, rgba(10, 90, 194, .75) 0 0 12px 0px;
+        box-shadow: c.$BOX_SHADOW;
 
         p {
             margin: 0;
 
             span {
-                background: c.$TEXT_GRADIENT;
-                background-clip: text;
-                color: transparent;
+                font-weight: 100;
+                color: c.$NEON_TRSP;
+                text-shadow: c.$TEXT_SHADOW;
             }
 
             &:last-of-type {
@@ -59,47 +58,53 @@ article {
     }
 
     a {
-        position: relative;
-        // align-self: center;
-        
-        width: fit-content;
-        padding: .25rem 1.5rem;
-        
-        font-size: 1.25rem;
-        text-decoration: none;
+        width: max-content;
+        margin: 0 .2em;
+        padding: .5em 1em .5em 1em;
 
-        box-sizing: padding-box;
-        border-radius: 1em;
-        background: rgb(255, 255, 255, .9);
+        border-radius: 10em;
+        font-size: .9em;
+
+        text-decoration: none;
+        font-weight: 400;
+
+        color: c.$NEON_TRSP;
+        text-shadow: c.$TEXT_SHADOW;
+        
+        border: 1px solid c.$NEON_TRSP;
+        box-shadow: c.$BOX_SHADOW;
 
         cursor: pointer;
-
-        &::before {
-            content: "";
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            width: 100%;
-            height: 100%;
-            background: c.$TEXT_GRADIENT;
-            padding: 1px;
-            border-radius: inherit;
-
-            z-index: -1;
-        }
         
-        span {
-            background-clip: text;
-            color: transparent;
-            background-image: c.$TEXT_GRADIENT;
-        }
-
         &:hover {
-            background: black;
+            animation: onHover 5s;
         }
     }
 
     form {
         height: 0;
+    }
+}
+
+@keyframes onHover {
+    0% {
+        border: 1px solid c.$NEON_TRSP;
+        box-shadow: c.$BOX_SHADOW;
+    }
+    1% {
+        border: 1px solid rgba(255, 255, 255, .2);
+        box-shadow: none;
+    }
+    2% {
+        border: 1px solid c.$NEON_TRSP;
+        box-shadow: c.$BOX_SHADOW;
+    }
+    3% {
+        border: 1px solid rgba(255, 255, 255, .2);
+        box-shadow: none;
+    }
+    4% {
+        border: 1px solid c.$NEON_TRSP;
+        box-shadow: c.$BOX_SHADOW;
     }
 }
