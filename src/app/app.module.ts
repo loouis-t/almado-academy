@@ -24,6 +24,7 @@ import { EnconstructionComponent } from './en-construction/enconstruction.compon
 import { LoginComponent } from './login/login.component';
 import { CoachingComponent } from './coaching/coaching.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { PanierComponent } from './panier/panier.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     EnconstructionComponent,
     LoginComponent,
     CoachingComponent,
-    DashboardComponent
+    DashboardComponent,
+    PanierComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule,
     AppRoutingModule,
     RouterModule.forRoot([
+      { path: 'panier', component: PanierComponent },
       { path: 'produits/coaching', component: CoachingComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'login', component: LoginComponent },

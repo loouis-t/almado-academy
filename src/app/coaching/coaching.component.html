@@ -19,9 +19,9 @@
             Si vous choisissez de réserver une séance, vous serez contacté par <span>mail</span> afin de convenir d'un crénau. La séance sera assurée dans un délais maximum <span>d'une semaine</span>.
         </p>
         
-        <a (click)="pay()">Réserver ma séance</a>
+        <a (click)="addToCart()">Réserver ma séance</a>
     </section>
-    <form id="pay" method="POST" action="https://recette-tpeweb.e-transactions.fr/php/">
+    <!-- <form id="pay" method="POST" action="https://recette-tpeweb.e-transactions.fr/php/">
         <input type="hidden" name="PBX_SITE" value="1999887">
         <input type="hidden" name="PBX_RANG" value="32">
         <input type="hidden" name="PBX_IDENTIFIANT" value="2">
@@ -34,7 +34,5 @@
         <input type="hidden" name="PBX_HASH" value="SHA512">
         <input type="hidden" name="PBX_TIME" [value]="dateTime">
         <input type="hidden" name="PBX_HMAC" [value]="hmac">
-        
-        <!-- <button type="submit">Réserver</button> -->
-    </form>
+    </form> -->
 </article>

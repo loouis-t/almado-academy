@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import * as crypto from 'crypto-js';
 import { Router } from '@angular/router';
 
 import {
@@ -48,8 +47,9 @@ export class DashboardComponent implements OnInit {
       this.userDetails = JSON.parse(storage);
       this.type_connexion = localStorage.getItem('connectionType')!;
 
-      // récupérer commandes
-      let thisClientToken = crypto.SHA256(this.type_connexion + this.userDetails.name + this.userDetails.mail + this.userDetails.id).toString(crypto.enc.Hex);
+      // récupérer commandes (recup token dans session)
+      let thisClientToken = localStorage.getItem('token');
+
       this.http.get('/api/formations_ligne/'+thisClientToken).subscribe({
         next: data => {
           this.formations_ligne = data;

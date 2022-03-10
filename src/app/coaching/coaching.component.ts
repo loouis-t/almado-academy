@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-coaching',
@@ -16,33 +17,34 @@ export class CoachingComponent implements OnInit {
   form!: HTMLFormElement;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
   }
 
-  pay(): void {
-    this.http.post<any>('/api/paiement/', {
-      ref: this.ref,
-      mail: this.mail
+  // ajouter [appel page login] si aucun utilisateur connecté
+  addToCart(): void {
+    let thisClientToken = localStorage.getItem('token');
+    
+    this.http.post<any>('/api/paniers/', {
+      token: thisClientToken,
+      ref: this.ref
     }).subscribe({
       next: data => {
-        this.hmac = data['cle'];
-        this.dateTime = data['date'];
-        this.montant = data['montant'];
-
-        // submit
-        this.form = document.querySelector('#pay')!;
-        setTimeout(() => {
-          this.form.submit();
-        }, 250);
-        
-
       },
       error: error => {
-        console.log('Il y a eu une erreur: ' + error);
+        console.log('Impossible de récupérer le panier de ce client: ' + error);
       }
     });
+
+    // ajouter aussi en local en cas d'erreur de connexion a la base
+    localStorage.setItem('panier', JSON.stringify([{
+      nom: 'Coaching',
+      prix: '25'
+    }]));
+    console.log(localStorage.getItem('panier'));
+    this.router.navigate(['panier']);
   }
 }

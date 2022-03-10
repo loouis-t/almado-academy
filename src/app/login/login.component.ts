@@ -89,6 +89,8 @@ export class LoginComponent implements OnInit {
 
       // Gérer ajout en base
       let thisClientToken = crypto.SHA256(this.type_connexion + this.userDetails.name + this.userDetails.mail + this.userDetails.id).toString(crypto.enc.Hex);
+      localStorage.setItem('token', thisClientToken); // keep in session storage
+
       this.http.get('/api/clients/'+thisClientToken).subscribe({
         next: data => {
           // Si déjà dans la base : NE RIEN FAIRE
