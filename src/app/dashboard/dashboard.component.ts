@@ -18,9 +18,7 @@ export class DashboardComponent implements OnInit {
   public type_connexion: string = "E";
   postId!: any;
 
-  formations_ligne!: any;
-  coachings!: any;
-  reglages!: any;
+  commandes!: any;
 
 
   constructor(
@@ -50,32 +48,29 @@ export class DashboardComponent implements OnInit {
       // récupérer commandes (recup token dans session)
       let thisClientToken = localStorage.getItem('token');
 
-      this.http.get('/api/formations_ligne/'+thisClientToken).subscribe({
+      this.http.get('/api/commandes/'+thisClientToken).subscribe({
         next: data => {
-          this.formations_ligne = data;
+          this.commandes = data;
         },
         error: error => {
-          console.log("Aucune commande de formation en ligne");
-        }
-      });
-      this.http.get('/api/coachings/'+thisClientToken).subscribe({
-        next: data => {
-          this.coachings = data;
-        },
-        error: error => {
-          console.log("Aucune commande de coaching");
-        }
-      });
-      this.http.get('/api/reglages/'+thisClientToken).subscribe({
-        next: data => {
-          this.reglages = data;
-        },
-        error: error => {
-          console.log("Aucune commande de réglage");
+          console.log("Aucune commande trouvée");
         }
       });
     } else {
       this.signOut();
+    }
+  }
+
+  prixProduit(el: string) {
+    switch(el) {
+      case "almado_ac_coaching":
+        return 25;
+      case "almado_ac_formation":
+        return 30;
+      case "almado_ac_reglage":
+        return 10;
+      default:
+        return "";
     }
   }
 }

@@ -8,20 +8,10 @@
                 <td>Date de commande</td>
                 <td>Prix</td>
             </thead>
-            <tr *ngFor="let formation of formations_ligne">
-                <td>Formation en ligne</td>
-                <td>{{ formation.date }}</td>
-                <td>30€</td>
-            </tr>
-            <tr *ngFor="let coaching of coachings">
-                <td>Coaching personnalisé</td>
-                <td>{{ coaching.date }}</td>
-                <td>25€</td>
-            </tr>
-            <tr *ngFor="let reglage of reglages">
-                <td>Réglage automobile</td>
-                <td>{{ reglage.date }}</td>
-                <td>10€</td>
+            <tr *ngFor="let commande of commandes">
+                <td>{{ commande.ref }}</td>
+                <td>{{ commande.date }}</td>
+                <td>{{ prixProduit(commande.ref) }}</td>
             </tr>
         </table>
 
