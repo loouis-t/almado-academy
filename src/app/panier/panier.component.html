@@ -2,18 +2,22 @@
     <h2>Panier</h2>
 
     <table>
+        <thead>
+            <td>Produit</td>
+            <td>prix</td>
+        </thead>
         <!-- table panier par utilisateur -->
         <tr *ngFor="let produit of panier"> 
-            <td>{{ produit.nom }}</td>
+            <td>{{ getNomFromRef(produit.ref) }}</td>
             <td>{{ produit.prix }}€</td>
         </tr>
     </table>
 
     <p *ngIf="panier_vide">Votre panier est vide</p>
 
-    <a id="pay" (click)="pay()">Valider mon panier</a>
+    <a id="pay_button" (click)="pay()">Valider mon panier</a>
 
-    <form id="pay" method="POST" action="https://recette-tpeweb.e-transactions.fr/php/">
+    <form id="pay_form" method="POST" action="https://recette-tpeweb.e-transactions.fr/php/">
         <input type="hidden" name="PBX_SITE" value="1999887">
         <input type="hidden" name="PBX_RANG" value="32">
         <input type="hidden" name="PBX_IDENTIFIANT" value="2">

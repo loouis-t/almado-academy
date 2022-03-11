@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./coaching.component.scss']
 })
 export class CoachingComponent implements OnInit {
-  ref: string = "almado-ac-coaching";
   mail: string = "essai@gmail.com";
   dateTime!: string;
   montant!: string;
@@ -30,7 +29,8 @@ export class CoachingComponent implements OnInit {
     
     this.http.post<any>('/api/paniers/', {
       token: thisClientToken,
-      ref: this.ref
+      ref: "almado_ac_coaching",
+      prix: "25"
     }).subscribe({
       next: data => {
       },
@@ -41,7 +41,8 @@ export class CoachingComponent implements OnInit {
 
     // ajouter aussi en local en cas d'erreur de connexion a la base
     localStorage.setItem('panier', JSON.stringify([{
-      nom: 'Coaching',
+      token: thisClientToken,
+      ref: 'almado_ac_coaching',
       prix: '25'
     }]));
     console.log(localStorage.getItem('panier'));
