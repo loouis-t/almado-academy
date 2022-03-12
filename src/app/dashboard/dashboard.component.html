@@ -9,9 +9,9 @@
                 <td>Prix</td>
             </thead>
             <tr *ngFor="let commande of commandes">
-                <td>{{ commande.ref }}</td>
+                <td>{{ commande.numero }}</td>
                 <td>{{ commande.date }}</td>
-                <td>{{ prixProduit(commande.ref) }}</td>
+                <td>{{ commande.prix }}</td>
             </tr>
         </table>
 

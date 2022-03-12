@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as crypto from 'crypto-js';
 
 // import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: SocialAuthService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -113,7 +114,15 @@ export class LoginComponent implements OnInit {
           });
         }
       });
-      this.router.navigate(['dashboard']);
+      
+      this.route.queryParams
+        .subscribe(params => {
+          if (params['origin'] == 'panier') {
+            this.router.navigate(['panier']);
+          } else {
+            this.router.navigate(['dashboard']);
+          }
+        })
       
 
     }

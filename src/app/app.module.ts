@@ -25,6 +25,7 @@ import { LoginComponent } from './login/login.component';
 import { CoachingComponent } from './coaching/coaching.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PanierComponent } from './panier/panier.component';
+import { PreLancementComponent } from './pre-lancement/pre-lancement.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PanierComponent } from './panier/panier.component';
     LoginComponent,
     CoachingComponent,
     DashboardComponent,
-    PanierComponent
+    PanierComponent,
+    PreLancementComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import { PanierComponent } from './panier/panier.component';
     HttpClientModule,
     AppRoutingModule,
     RouterModule.forRoot([
+      { path: 'pre', component: PreLancementComponent },
       { path: 'panier', component: PanierComponent },
       { path: 'produits/coaching', component: CoachingComponent },
       { path: 'dashboard', component: DashboardComponent },

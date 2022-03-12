@@ -48,7 +48,7 @@ article {
 
         span {
             font-weight: 100;
-            color: rgba(255, 255, 255, .75);
+            color: c.$NEON_TRSP;
             text-shadow: c.$TEXT_SHADOW;
 
             animation: 10s flash infinite;

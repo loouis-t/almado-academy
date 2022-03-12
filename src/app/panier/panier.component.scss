@@ -11,7 +11,7 @@ article {
         position: absolute;
         width: 100%; height: 100%;
         top: 0; left: 0;
-        background: url('../../assets/gt7.jpg') no-repeat;
+        background: url('../../assets/gt7.jpg');
         background-position: 50% 50%;
         object-fit: cover;
         opacity: .5;
@@ -75,10 +75,8 @@ article {
         font-weight: 400;
 
         color: c.$NEON_TRSP;
-        text-shadow: c.$TEXT_SHADOW;
         
         border: 1px solid c.$NEON_TRSP;
-        box-shadow: c.$BOX_SHADOW;
 
         cursor: pointer;
         
@@ -90,6 +88,11 @@ article {
     form {
         height: 0; width: 0;
     }
+}
+
+.button_style {
+    text-shadow: c.$TEXT_SHADOW;
+    box-shadow: c.$BOX_SHADOW;
 }
 
 
