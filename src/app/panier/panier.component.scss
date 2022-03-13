@@ -38,8 +38,17 @@ article {
         }
 
         td {
+            position: relative;
             padding: .5em;
             background: black;
+
+            span {
+                position: absolute;
+                transform: translate(-100%, 0);
+                left: -1em;
+                font-weight: bold;
+                cursor: pointer;
+            }
 
             &:first-of-type {
                 width: 90%;

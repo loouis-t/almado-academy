@@ -30,7 +30,8 @@ export class PanierComponent implements OnInit {
     var storage = JSON.parse(localStorage.getItem('panier')!);
     
     if (localStorage.getItem('panier') != undefined) { 
-      if ((storage[0]).token != null) {         // transérer panier local dans BDD
+      if ((storage[0]).token == null) {         // transérer panier local dans BDD
+        storage[0].token = thisClientToken;
         this.http.post<any>('/api/paniers/', storage[0]).subscribe({
           next: data => {
             // vider panier local : eviter rajout en base a chaque actualisation
@@ -54,9 +55,9 @@ export class PanierComponent implements OnInit {
           // récup mail de cette personne
           this.mail = (JSON.parse(localStorage.getItem('auth')!)).email;
 
-          this.http.get<string>('/api/commandes/').subscribe({
+          this.http.get<any>('/api/commandes/').subscribe({
             next: data => {
-              this.ref = data;
+              this.ref = data.a_attribuer;
             },
             error: error => {
               console.log("Erreur lors de l'appel de la référence de commande (numéro de commande)\n" + error.message);
@@ -66,6 +67,8 @@ export class PanierComponent implements OnInit {
         error: error => {
           // si non-connecté : local
           console.log('Impossible de recuperer le panier: ' + error);
+          this.panier = null;
+          this.actualiserBoolPanierVide(true);
         }
       });
     } else {
@@ -92,9 +95,11 @@ export class PanierComponent implements OnInit {
 
   actualiserBoolPanierVide(state: boolean): void {
     this.panier_vide = state;
+    const pay_button: HTMLElement = document.querySelector('#pay_button')!;
     if (!this.panier_vide) {
-      const pay_button: HTMLElement = document.querySelector('#pay_button')!;
       pay_button.classList.add('button_style');
+    } else {
+      pay_button.classList.remove('button_style');
     }
   }
 
@@ -130,5 +135,17 @@ export class PanierComponent implements OnInit {
         this.router.navigate(['login'], { queryParams: { origin: 'panier' } });
       }
     }
+  }
+
+  removeFromCart(ref_to_remove: string): void {
+    this.http.delete<any>('/api/paniers/'+localStorage.getItem('token')+"|"+ref_to_remove).subscribe({
+      next: data => {
+        console.log(data);
+      },
+      error: error => {
+        console.log('Impossible de récupérer les données de nécessaires au paiement: ' + error);
+      }
+    });
+    this.ngOnInit();
   }
 }

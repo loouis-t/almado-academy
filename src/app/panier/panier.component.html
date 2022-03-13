@@ -8,7 +8,7 @@
         </thead>
         <!-- table panier par utilisateur -->
         <tr *ngFor="let produit of panier"> 
-            <td>{{ getNomFromRef(produit.ref) }}</td>
+            <td><span (click)="removeFromCart(produit.ref)">[ - ]</span> {{ getNomFromRef(produit.ref) }}</td>
             <td>{{ produit.prix }}€</td>
         </tr>
     </table>
