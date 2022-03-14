@@ -87,7 +87,7 @@ article {
                 width: calc(.95 * ((60vw) / 3));
                 min-height: calc(.95 * (16 * ((60vw) / 27))); // min: 16:9
 
-                box-shadow: inset rgba(194, 10, 19, 0.75) 0 0 12px 0px, rgba(194, 10, 19, 0.75) 0 0 12px 0px;
+                box-shadow: c.$BOX_SHADOW_RED;
             }
 
             h3 {

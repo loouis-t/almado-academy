@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class PanierComponent implements OnInit {
 
   montant!: string;
-  ref!: string;
+  numero_commande!: string;
   mail!: string;
   dateTime!: string;
   hmac!: string;
@@ -57,7 +57,7 @@ export class PanierComponent implements OnInit {
 
           this.http.get<any>('/api/commandes/').subscribe({
             next: data => {
-              this.ref = data.a_attribuer;
+              this.numero_commande = data.a_attribuer;
             },
             error: error => {
               console.log("Erreur lors de l'appel de la référence de commande (numéro de commande)\n" + error.message);
@@ -108,7 +108,7 @@ export class PanierComponent implements OnInit {
       if (localStorage.getItem('token') != undefined) {
         this.http.post<any>('/api/paiement/', {
           token: localStorage.getItem('token'),
-          ref: this.ref,
+          numero_commande: this.numero_commande,
           mail: this.mail
         }).subscribe({
           next: data => {
