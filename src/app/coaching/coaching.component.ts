@@ -24,17 +24,16 @@ export class CoachingComponent implements OnInit {
   }
 
   
-  addToCart(): void {
+  addToCart(prix: string, group: string): void {
     let thisClientToken = localStorage.getItem('token');
 
     localStorage.setItem('panier', JSON.stringify([
       {
         token: thisClientToken,
-        ref: 'almado-ac-coaching',
-        prix: '25'
+        ref: 'almado-ac-coaching'+group,
+        prix: prix
       }
     ]));
-    console.log(localStorage.getItem('panier'));
     this.router.navigate(['panier']);
   }
 }

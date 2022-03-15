@@ -39,6 +39,7 @@ export class PanierComponent implements OnInit {
           },
           error: error => {
             console.log("erreur de mise a jour panier en base" + error.message);
+            alert('Une erreur est survenue lors d\'un appel en base, veuillez nous excuser pour la gêne occasionnée. \nVous pouvez tenter d\'actualiser la page. Si le problème persiste, informez-nous : help@almado-academy.fr\n\ncode : 001');
           }
         });
       }
@@ -61,6 +62,7 @@ export class PanierComponent implements OnInit {
             },
             error: error => {
               console.log("Erreur lors de l'appel de la référence de commande (numéro de commande)\n" + error.message);
+              alert('Une erreur est survenue lors d\'un appel en base, veuillez nous excuser pour la gêne occasionnée. \nVous pouvez tenter d\'actualiser la page. Si le problème persiste, informez-nous : help@almado-academy.fr\n\ncode : 002');
             }
           });
         },
@@ -69,6 +71,7 @@ export class PanierComponent implements OnInit {
           console.log('Impossible de recuperer le panier: ' + error);
           this.panier = null;
           this.actualiserBoolPanierVide(true);
+          alert('Une erreur est survenue lors d\'un appel en base, veuillez nous excuser pour la gêne occasionnée. \nVous pouvez tenter d\'actualiser la page. Si le problème persiste, informez-nous : help@almado-academy.fr\n\ncode : 003');
         }
       });
     } else {
@@ -87,7 +90,9 @@ export class PanierComponent implements OnInit {
       case "almado-ac-formation":
         return "Formation en ligne";
       case "almado-ac-coaching":
-        return "Séance de coaching personnalisé";
+        return "Séance de coaching personnalisé (1 pers.)";
+      case "almado-ac-coaching-group":
+        return "Séance de coaching personnalisé (5 pers.)";
       default:
         return ref;
     }
@@ -138,12 +143,14 @@ export class PanierComponent implements OnInit {
   }
 
   removeFromCart(ref_to_remove: string): void {
+    localStorage.removeItem('panier');
+    
     this.http.delete<any>('/api/paniers/'+localStorage.getItem('token')+"|"+ref_to_remove).subscribe({
       next: data => {
         console.log(data);
       },
       error: error => {
-        console.log('Impossible de récupérer les données de nécessaires au paiement: ' + error);
+        console.log('Erreur lors de la suppression d\'un élément du panier : ' + error);
       }
     });
     this.ngOnInit();

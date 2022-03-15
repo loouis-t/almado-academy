@@ -18,7 +18,10 @@
             <br>
             Si vous choisissez de réserver une séance, vous serez contacté par <span>mail</span> afin de convenir d'un crénau. La séance sera assurée dans un délais maximum d'<span>une semaine</span>.
         </p>
-        
-        <a (click)="addToCart()">Réserver ma séance</a>
+
+        <div>
+            <a (click)="addToCart('25', '')">1 coaching (25€)</a>
+            <a (click)="addToCart('100', '-group')">5 coachings (100€)</a>
+        </div>
     </section>
 </article>
