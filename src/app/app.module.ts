@@ -26,6 +26,8 @@ import { CoachingComponent } from './coaching/coaching.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PanierComponent } from './panier/panier.component';
 import { PreLancementComponent } from './pre-lancement/pre-lancement.component';
+import { SuccesComponent } from './succes/succes.component';
+import { EchecComponent } from './echec/echec.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { PreLancementComponent } from './pre-lancement/pre-lancement.component';
     CoachingComponent,
     DashboardComponent,
     PanierComponent,
-    PreLancementComponent
+    PreLancementComponent,
+    SuccesComponent,
+    EchecComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,9 @@ import { PreLancementComponent } from './pre-lancement/pre-lancement.component';
     HttpClientModule,
     AppRoutingModule,
     RouterModule.forRoot([
-      { path: 'pre', component: PreLancementComponent },
+      { path: 'echec', component: EchecComponent },
+      { path: 'succes', component: SuccesComponent },
+      { path: 'osmoz-pre-44bf0118fe', component: PreLancementComponent },
       { path: 'panier', component: PanierComponent },
       { path: 'produits/coaching', component: CoachingComponent },
       { path: 'dashboard', component: DashboardComponent },

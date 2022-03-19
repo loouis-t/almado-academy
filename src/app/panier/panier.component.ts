@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 import { Router } from '@angular/router';
+const htmlspecialchars = require('htmlspecialchars');
 
 @Component({
   selector: 'app-panier',
@@ -15,6 +16,10 @@ export class PanierComponent implements OnInit {
   dateTime!: string;
   hmac!: string;
 
+  nom_complet!: string;
+  billing!: string;
+  shopping_cart!: string;
+
   panier!: any;
   panier_vide: boolean = true;
 
@@ -26,25 +31,26 @@ export class PanierComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     let thisClientToken = localStorage.getItem('token');
     var storage = JSON.parse(localStorage.getItem('panier')!);
     
     if (localStorage.getItem('panier') != undefined) { 
       if ((storage[0]).token == null) {         // transérer panier local dans BDD
         storage[0].token = thisClientToken;
-        this.http.post<any>('/api/paniers/', storage[0]).subscribe({
-          next: data => {
-            // vider panier local : eviter rajout en base a chaque actualisation
-            localStorage.removeItem('panier');
-          },
-          error: error => {
-            console.log("erreur de mise a jour panier en base" + error.message);
-            alert('Une erreur est survenue lors d\'un appel en base, veuillez nous excuser pour la gêne occasionnée. \nVous pouvez tenter d\'actualiser la page. Si le problème persiste, informez-nous : help@almado-academy.fr\n\ncode : 001');
-          }
-        });
       }
+      this.http.post<any>('/api/paniers/', storage[0]).subscribe({
+        next: data => {
+          // vider panier local : eviter rajout en base a chaque actualisation
+          localStorage.removeItem('panier');
+        },
+        error: error => {
+          console.log("erreur de mise a jour panier en base" + error.message);
+          alert('Une erreur est survenue lors d\'un appel en base, veuillez nous excuser pour la gêne occasionnée. \nVous pouvez tenter d\'actualiser la page. Si le problème persiste, informez-nous : help@almado-academy.fr\n\ncode : 001');
+        }
+      });
     }
-
+    
     if (thisClientToken != undefined) {
       // recuperer panier en BDD ou en local
       this.http.get('/api/paniers/'+thisClientToken).subscribe({
@@ -52,10 +58,10 @@ export class PanierComponent implements OnInit {
           // si user connecté : BDD
           this.panier = data;
           this.actualiserBoolPanierVide(false);
-
+          
           // récup mail de cette personne
           this.mail = (JSON.parse(localStorage.getItem('auth')!)).email;
-
+          
           this.http.get<any>('/api/commandes/').subscribe({
             next: data => {
               this.numero_commande = data.a_attribuer;
@@ -68,10 +74,12 @@ export class PanierComponent implements OnInit {
         },
         error: error => {
           // si non-connecté : local
-          console.log('Impossible de recuperer le panier: ' + error);
+          console.log('Impossible de recuperer le panier: \n'+(error.message || error.error));
           this.panier = null;
           this.actualiserBoolPanierVide(true);
-          alert('Une erreur est survenue lors d\'un appel en base, veuillez nous excuser pour la gêne occasionnée. \nVous pouvez tenter d\'actualiser la page. Si le problème persiste, informez-nous : help@almado-academy.fr\n\ncode : 003');
+          if(error.status == '504') {
+            alert('Une erreur est survenue lors d\'un appel en base, veuillez nous excuser pour la gêne occasionnée. \nVous pouvez tenter d\'actualiser la page. Si le problème persiste, informez-nous : help@almado-academy.fr\n\ncode : 003');
+          }
         }
       });
     } else {
@@ -81,18 +89,18 @@ export class PanierComponent implements OnInit {
       }
     }
   }
-
+  
   getNomFromRef(ref: string) {
     
     switch(ref) {
       case "almado-ac-reglage":
         return "Réglages vehicule";
-      case "almado-ac-formation":
-        return "Formation en ligne";
+        case "almado-ac-formation":
+          return "Formation en ligne";
       case "almado-ac-coaching":
         return "Séance de coaching personnalisé (1 pers.)";
-      case "almado-ac-coaching-group":
-        return "Séance de coaching personnalisé (5 pers.)";
+        case "almado-ac-coaching-group":
+          return "Séance de coaching personnalisé (5 pers.)";
       default:
         return ref;
     }
@@ -107,25 +115,33 @@ export class PanierComponent implements OnInit {
       pay_button.classList.remove('button_style');
     }
   }
-
+  
   pay(): void {
     if(!this.panier_vide) {
+      // data to post to /API and CA module
+      this.nom_complet = JSON.parse(localStorage.getItem('auth')!).name;
+      this.billing = htmlspecialchars(`<?xml version="1.0" encoding="utf-8"?><Billing><Address><FirstName>${this.nom_complet.split(' ')[0]}</Firstname><LastName>${this.nom_complet.split(' ')[1]}</LastName><Address1>33 chemin de Lagrange</Address1><ZipCode>31120</ZipCode><City>Roques</City><CountryCode>250</CountryCode></Address></Billing>`);
+      this.shopping_cart = htmlspecialchars(`<?xml version="1.0" encoding="utf-8"?><shoppingcart><total><totalQuantity>${this.panier.length}</totalQuantity></total></shoppingcart>`);
+
       if (localStorage.getItem('token') != undefined) {
         this.http.post<any>('/api/paiement/', {
           token: localStorage.getItem('token'),
           numero_commande: this.numero_commande,
-          mail: this.mail
+          mail: this.mail,
+          billing: this.billing,
+          shopping_cart: this.shopping_cart
         }).subscribe({
           next: data => {
+            //données pour le form
             this.hmac = data['cle'];
             this.dateTime = data['date'];
             this.montant = data['montant'];
-
+            
             console.log(this.montant);
             console.log(this.hmac);
             console.log(this.dateTime);
+            console.log(this.billing);
             
-
             // submit
             this.form = document.querySelector('#pay_form')!;
             setTimeout(() => {

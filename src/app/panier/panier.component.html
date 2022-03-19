@@ -17,18 +17,22 @@
 
     <a id="pay_button" (click)="pay()">Valider mon panier</a>
 
-    <form id="pay_form" method="POST" action="https://recette-tpeweb.e-transactions.fr/php/">
-        <input type="hidden" name="PBX_SITE" value="1999887">
-        <input type="hidden" name="PBX_RANG" value="32">
-        <input type="hidden" name="PBX_IDENTIFIANT" value="2">
-        <input type="hidden" name="PBX_SOURCE" value="RWD">
+    <form id="pay_form" method="POST" action="https://tpeweb.e-transactions.fr/php/">
+        <input type="hidden" name="PBX_SITE" value="3054051">
+        <input type="hidden" name="PBX_RANG" value="001">
+        <input type="hidden" name="PBX_IDENTIFIANT" value="38015741">
         <input type="hidden" name="PBX_TOTAL" [value]="montant">
         <input type="hidden" name="PBX_DEVISE" value="978">
         <input type="hidden" name="PBX_CMD" [value]="numero_commande">
         <input type="hidden" name="PBX_PORTEUR" [value]="mail">
-        <input type="hidden" name="PBX_RETOUR" value="Mt:M;Ref:R;Auto:A;Erreur:E">
+        <input type="hidden" name="PBX_RETOUR" value="Mt:M;Ref:R;Auto:A;Erreur:E;">
+        <input type="hidden" name="PBX_EFFECTUE" value="http://localhost:4200/succes">
+        <input type="hidden" name="PBX_ANNULE" value="http://localhost:4200/echec">
+        <input type="hidden" name="PBX_REFUSE" value="http://localhost:4200/echec">
         <input type="hidden" name="PBX_HASH" value="SHA512">
         <input type="hidden" name="PBX_TIME" [value]="dateTime">
+        <input type="hidden" name="PBX_SHOPPINGCART" [value]="shopping_cart">
+        <input type="hidden" name="PBX_BILLING" [value]="billing">
         <input type="hidden" name="PBX_HMAC" [value]="hmac">
     </form>
 </article>
