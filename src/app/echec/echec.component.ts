@@ -24,7 +24,11 @@ export class EchecComponent implements OnInit {
     }
 
     this.nom_complet = JSON.parse(localStorage.getItem('auth')!).name;
+  
     this.route.queryParams.subscribe(params => {
+      if (params['Erreur'] === undefined) {
+        this.router.navigate(['/']); // si arrivee sur la page sans parametre (arrivee par erreur)
+      }
       this.error_code = params['Erreur'];
       this.ref = params['Ref'];
       this.montant = (params['Mt'] / 100).toString();

@@ -17,7 +17,7 @@
 
     <a id="pay_button" (click)="pay()">Valider mon panier</a>
 
-    <form id="pay_form" method="POST" action="https://tpeweb.e-transactions.fr/php/">
+    <form id="pay_form" method="POST" action="https://recette-tpeweb.e-transactions.fr/php/">
         <input type="hidden" name="PBX_SITE" value="3054051">
         <input type="hidden" name="PBX_RANG" value="001">
         <input type="hidden" name="PBX_IDENTIFIANT" value="38015741">
@@ -25,7 +25,8 @@
         <input type="hidden" name="PBX_DEVISE" value="978">
         <input type="hidden" name="PBX_CMD" [value]="numero_commande">
         <input type="hidden" name="PBX_PORTEUR" [value]="mail">
-        <input type="hidden" name="PBX_RETOUR" value="Mt:M;Ref:R;Auto:A;Erreur:E;">
+        <!-- <input type="hidden" name="PBX_REPONDRE_A" value="http://localhost:4200/"> -->
+        <input type="hidden" name="PBX_RETOUR" value="Mt:M;Ref:R;Auto:A;Erreur:E;Sign:K;">
         <input type="hidden" name="PBX_EFFECTUE" value="http://localhost:4200/succes">
         <input type="hidden" name="PBX_ANNULE" value="http://localhost:4200/echec">
         <input type="hidden" name="PBX_REFUSE" value="http://localhost:4200/echec">
