@@ -36,7 +36,7 @@ export class SuccesComponent implements OnInit {
         if (params['Erreur'] === "00000") {
           this.prix = (params['Mt'] / 100).toString();
 
-          let uri_data = (this.route.snapshot as any)['_routerState'].url.split('succes?')[1].split('&Sign')[0];
+          let uri_data = (this.route.snapshot as any)['_routerState'].url.split('succes?')[1].split('&Sign')[0]; // recupérer toute la chaine avant '&Sign'
           this.http.post<any>('/api/sign/', {
             signature: params['Sign'],
             data: uri_data
