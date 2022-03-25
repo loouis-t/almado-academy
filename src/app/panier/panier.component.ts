@@ -36,19 +36,19 @@ export class PanierComponent implements OnInit {
     var storage = JSON.parse(localStorage.getItem('panier')!);
     
     if (localStorage.getItem('panier') != undefined) { 
-      if ((storage[0]).token == null) {         // transérer panier local dans BDD
-        storage[0].token = thisClientToken;
+      
+      if ((storage[0]).token != null) {         // transérer panier local dans BDD
+        this.http.post<any>('/api/paniers/', storage[0]).subscribe({
+          next: data => {
+            // vider panier local : eviter rajout en base a chaque actualisation
+            localStorage.removeItem('panier');
+          },
+          error: error => {
+            console.log("erreur de mise a jour panier en base" + error.message);
+            alert('Une erreur est survenue lors d\'un appel en base, veuillez nous excuser pour la gêne occasionnée. \nVous pouvez tenter d\'actualiser la page. Si le problème persiste, informez-nous : help@almado-academy.fr\n\ncode : 001');
+          }
+        });
       }
-      this.http.post<any>('/api/paniers/', storage[0]).subscribe({
-        next: data => {
-          // vider panier local : eviter rajout en base a chaque actualisation
-          localStorage.removeItem('panier');
-        },
-        error: error => {
-          console.log("erreur de mise a jour panier en base" + error.message);
-          alert('Une erreur est survenue lors d\'un appel en base, veuillez nous excuser pour la gêne occasionnée. \nVous pouvez tenter d\'actualiser la page. Si le problème persiste, informez-nous : help@almado-academy.fr\n\ncode : 001');
-        }
-      });
     }
     
     if (thisClientToken != undefined) {
