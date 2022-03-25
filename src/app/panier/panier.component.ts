@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 import { Router } from '@angular/router';
-const htmlspecialchars = require('htmlspecialchars');
+// const htmlspecialchars = require('htmlspecialchars');
 
 @Component({
   selector: 'app-panier',
@@ -120,8 +120,8 @@ export class PanierComponent implements OnInit {
     if(!this.panier_vide) {
       // data to post to /API and CA module
       this.nom_complet = JSON.parse(localStorage.getItem('auth')!).name;
-      this.billing = htmlspecialchars(`<?xml version="1.0" encoding="utf-8"?><Billing><Address><FirstName>${this.nom_complet.split(" ")[0]}</Firstname><LastName>${this.nom_complet.split(" ")[1]}</LastName><Address1>33 bis chemin de Lagrange</Address1><ZipCode>31120</ZipCode><City>Roques</City><CountryCode>250</CountryCode></Address></Billing>`);
-      this.shopping_cart = htmlspecialchars(`<?xml version="1.0" encoding="utf-8"?><shoppingcart><total><totalQuantity>${this.panier.length}</totalQuantity></total></shoppingcart>`);
+      this.billing = `<?xml version="1.0" encoding="utf-8"?><Billing><Address><FirstName>${this.nom_complet.split(" ")[0]}</Firstname><LastName>${this.nom_complet.split(" ")[1]}</LastName><Address1>33 bis chemin de Lagrange</Address1><ZipCode>31120</ZipCode><City>Roques</City><CountryCode>250</CountryCode></Address></Billing>`;
+      this.shopping_cart = `<?xml version="1.0" encoding="utf-8"?><shoppingcart><total><totalQuantity>${this.panier.length}</totalQuantity></total></shoppingcart>`;
 
       if (localStorage.getItem('token') != undefined) {
         this.http.post<any>('/api/paiement/', {
