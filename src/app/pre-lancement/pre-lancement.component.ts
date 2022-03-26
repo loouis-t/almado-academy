@@ -20,9 +20,9 @@ export class PreLancementComponent implements OnInit {
   addToCart(): void {
     let thisClientToken = localStorage.getItem('token');
 
-    this.http.get<any>('/api/paniers/'+thisClientToken).subscribe({
+    this.http.get<any>('https://www.api.almado-academy.fr/v1/paniers/'+thisClientToken).subscribe({
       next: data => {
-        this.http.get<any>('/api/commandes/'+thisClientToken).subscribe({
+        this.http.get<any>('https://www.api.almado-academy.fr/v1/commandes/'+thisClientToken).subscribe({
           next: data_commandes => {
             ajout_en_local: {
               for(let i=0; i<data.length; i++) {

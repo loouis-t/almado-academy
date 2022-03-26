@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
       // récupérer commandes (recup token dans session)
       let thisClientToken = localStorage.getItem('token');
 
-      this.http.get('/api/commandes/'+thisClientToken).subscribe({
+      this.http.get('https://www.api.almado-academy.fr/v1/commandes/'+thisClientToken).subscribe({
         next: data => {
           this.commandes = data;
         },

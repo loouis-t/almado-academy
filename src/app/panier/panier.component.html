@@ -26,14 +26,14 @@
         <input type="hidden" name="PBX_CMD" [value]="numero_commande">
         <input type="hidden" name="PBX_PORTEUR" [value]="mail">
         <input type="hidden" name="PBX_RETOUR" value="Mt:M;Ref:R;Erreur:E;Sign:K;">
-        <input type="hidden" name="PBX_EFFECTUE" value="http://localhost:4200/succes">
-        <input type="hidden" name="PBX_ANNULE" value="http://localhost:4200/echec">
-        <input type="hidden" name="PBX_REFUSE" value="http://localhost:4200/echec">
+        <input type="hidden" name="PBX_EFFECTUE" [value]="url+'/succes'">
+        <input type="hidden" name="PBX_ANNULE" [value]="url+'/echec'">
+        <input type="hidden" name="PBX_REFUSE" [value]="url+'/echec'">
         <input type="hidden" name="PBX_HASH" value="SHA512">
         <input type="hidden" name="PBX_TIME" [value]="dateTime">
         <input type="hidden" name="PBX_SHOPPINGCART" [value]="shopping_cart">
         <input type="hidden" name="PBX_BILLING" [value]="billing">
         <input type="hidden" name="PBX_HMAC" [value]="hmac">
     </form>
-    <!-- <input type="hidden" name="PBX_REPONDRE_A" value="http://localhost:4200/"> -->
+    <!-- <input type="hidden" name="PBX_REPONDRE_A" [value]="url"> -->
 </article>

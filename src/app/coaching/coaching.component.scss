@@ -57,32 +57,34 @@ article {
         }
     }
 
-    a {
-        width: max-content;
-        margin: 0 .2em;
-        padding: .5em 1em;
-
-        border-radius: 10em;
-        font-size: .9em;
-
-        text-decoration: none;
-        font-weight: 400;
-
-        color: c.$NEON_TRSP;
-        text-shadow: c.$TEXT_SHADOW;
+    div {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: .5em;
         
-        border: 1px solid c.$NEON_TRSP;
-        box-shadow: c.$BOX_SHADOW;
-
-        cursor: pointer;
-        
-        &:hover {
-            animation: onHover 5s;
+        a {
+            width: max-content;
+            margin: 0 .2em;
+            padding: .5em 1em;
+    
+            border-radius: 10em;
+            font-size: .9em;
+    
+            text-decoration: none;
+            font-weight: 400;
+    
+            color: c.$NEON_TRSP;
+            text-shadow: c.$TEXT_SHADOW;
+            
+            border: 1px solid c.$NEON_TRSP;
+            box-shadow: c.$BOX_SHADOW;
+    
+            cursor: pointer;
+            
+            &:hover {
+                animation: onHover 5s;
+            }
         }
-    }
-
-    form {
-        height: 0;
     }
 }
 
