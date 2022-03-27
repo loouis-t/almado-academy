@@ -25,7 +25,6 @@ import { LoginComponent } from './login/login.component';
 import { CoachingComponent } from './coaching/coaching.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PanierComponent } from './panier/panier.component';
-import { PreLancementComponent } from './pre-lancement/pre-lancement.component';
 import { SuccesComponent } from './succes/succes.component';
 import { EchecComponent } from './echec/echec.component';
 
@@ -41,7 +40,6 @@ import { EchecComponent } from './echec/echec.component';
     CoachingComponent,
     DashboardComponent,
     PanierComponent,
-    PreLancementComponent,
     SuccesComponent,
     EchecComponent
   ],
@@ -53,7 +51,6 @@ import { EchecComponent } from './echec/echec.component';
     RouterModule.forRoot([
       { path: 'echec', component: EchecComponent },
       { path: 'succes', component: SuccesComponent },
-      { path: 'osmoz-pre-44bf0118fe', component: PreLancementComponent },
       { path: 'panier', component: PanierComponent },
       { path: 'produits/coaching', component: CoachingComponent },
       { path: 'dashboard', component: DashboardComponent },

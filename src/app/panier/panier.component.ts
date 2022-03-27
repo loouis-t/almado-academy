@@ -21,6 +21,7 @@ export class PanierComponent implements OnInit {
   nom_complet!: string;
   billing!: string;
   shopping_cart!: string;
+  clientToken!: string;
 
   panier!: any;
   panier_vide: boolean = true;
@@ -33,17 +34,20 @@ export class PanierComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
-    let thisClientToken = localStorage.getItem('token');
+    this.clientToken = localStorage.getItem('token')!;
     var storage = JSON.parse(localStorage.getItem('panier')!);
     
     if (localStorage.getItem('panier') != undefined) { 
-      
-      if ((storage[0]).token != null) {         // transérer panier local dans BDD
-        this.http.post<any>('https://www.api.almado-academy.fr/v1/paniers/', storage[0]).subscribe({
+      if ((storage[0]).token != null || this.clientToken != undefined) {         // transérer panier local dans BDD
+        this.http.post<any>('https://www.api.almado-academy.fr/v1/paniers/', {
+          token: storage[0].token || this.clientToken,
+          ref: storage[0].ref,
+          prix: storage[0].prix
+        }).subscribe({
           next: data => {
             // vider panier local : eviter rajout en base a chaque actualisation
             localStorage.removeItem('panier');
+            window.location.reload();
           },
           error: error => {
             console.log("erreur de mise a jour panier en base" + error.message);
@@ -53,9 +57,9 @@ export class PanierComponent implements OnInit {
       }
     }
     
-    if (thisClientToken != undefined) {
+    if (this.clientToken != undefined) {
       // recuperer panier en BDD ou en local
-      this.http.get('https://www.api.almado-academy.fr/v1/paniers/'+thisClientToken).subscribe({
+      this.http.get('https://www.api.almado-academy.fr/v1/paniers/'+this.clientToken).subscribe({
         next: data => {
           // si user connecté : BDD
           this.panier = data;
@@ -120,12 +124,12 @@ export class PanierComponent implements OnInit {
   
   pay(): void {
     if(!this.panier_vide) {
-      // data to post to https://www.api.almado-academy.fr/v1 and CA module
-      this.nom_complet = JSON.parse(localStorage.getItem('auth')!).name;
-      this.billing = `<?xml version="1.0" encoding="utf-8"?><Billing><Address><FirstName>${this.nom_complet.split(" ")[0]}</Firstname><LastName>${this.nom_complet.split(" ")[1]}</LastName><Address1>33 bis chemin de Lagrange</Address1><ZipCode>31120</ZipCode><City>Roques</City><CountryCode>250</CountryCode></Address></Billing>`;
-      this.shopping_cart = `<?xml version="1.0" encoding="utf-8"?><shoppingcart><total><totalQuantity>${this.panier.length}</totalQuantity></total></shoppingcart>`;
-
       if (localStorage.getItem('token') != undefined) {
+        // data to post to https://www.api.almado-academy.fr/v1 and CA module
+        this.nom_complet = JSON.parse(localStorage.getItem('auth')!).name;
+        this.billing = `<?xml version="1.0" encoding="utf-8"?><Billing><Address><FirstName>${this.nom_complet.split(" ")[0]}</Firstname><LastName>${this.nom_complet.split(" ")[1]}</LastName><Address1>33 bis chemin de Lagrange</Address1><ZipCode>31120</ZipCode><City>Roques</City><CountryCode>250</CountryCode></Address></Billing>`;
+        this.shopping_cart = `<?xml version="1.0" encoding="utf-8"?><shoppingcart><total><totalQuantity>${this.panier.length}</totalQuantity></total></shoppingcart>`;
+
         this.http.post<any>('https://www.api.almado-academy.fr/v1/paiement/', {
           token: localStorage.getItem('token'),
           numero_commande: this.numero_commande,
@@ -162,15 +166,18 @@ export class PanierComponent implements OnInit {
 
   removeFromCart(ref_to_remove: string): void {
     localStorage.removeItem('panier');
-    
-    this.http.delete<any>('https://www.api.almado-academy.fr/v1/paniers/'+localStorage.getItem('token')+"|"+ref_to_remove).subscribe({
+
+    this.http.post<any>('https://www.api.almado-academy.fr/v1/paniers/delete', {
+      token: localStorage.getItem('token'),
+      ref: ref_to_remove
+    }).subscribe({
       next: data => {
         console.log(data);
+        window.location.reload();
       },
       error: error => {
         console.log('Erreur lors de la suppression d\'un élément du panier : ' + error);
       }
     });
-    this.ngOnInit();
   }
 }
