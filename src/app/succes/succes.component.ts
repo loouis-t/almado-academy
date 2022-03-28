@@ -37,14 +37,14 @@ export class SuccesComponent implements OnInit {
           this.prix = (params['Mt'] / 100).toString();
 
           let uri_data = (this.route.snapshot as any)['_routerState'].url.split('succes?')[1].split('&Sign')[0]; // recupérer toute la chaine avant '&Sign'
-          this.http.post<any>('https://www.api.almado-academy.fr/v1/sign/', {
+          this.http.post<any>('https://api.almado-academy.fr/v1/sign/', {
             signature: params['Sign'],
             data: uri_data
           }).subscribe({
             next: data => {
               if (data['isVerified']) {
                 // récupérer toutes les refs pour savoir ce qui est commandé
-                this.http.get<any>('https://www.api.almado-academy.fr/v1/paniers/'+this.token).subscribe({
+                this.http.get<any>('https://api.almado-academy.fr/v1/paniers/get/'+this.token).subscribe({
                   next: data => {
                     // concaténer les ref
                     this.ref = "";
@@ -56,7 +56,7 @@ export class SuccesComponent implements OnInit {
                     }
         
                     // post: transférer panier vers commandes
-                    this.http.post<any>('https://www.api.almado-academy.fr/v1/commandes/', {
+                    this.http.post<any>('https://api.almado-academy.fr/v1/commandes/create/', {
                       nom_complet: this.nom_complet,
                       token: this.token,
                       ref: this.ref,
@@ -74,7 +74,7 @@ export class SuccesComponent implements OnInit {
                     });
                     
                     // vider panier
-                    this.http.delete('https://www.api.almado-academy.fr/v1/paniers/'+this.token+"|").subscribe({
+                    this.http.post('https://api.almado-academy.fr/v1/paniers/delete/', { token: this.token }).subscribe({
                       next: data => {
                         console.log('Panier vidé.');
                       },

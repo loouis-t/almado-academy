@@ -92,13 +92,13 @@ export class LoginComponent implements OnInit {
       let thisClientToken = crypto.SHA256(this.type_connexion + this.userDetails.name + this.userDetails.mail + this.userDetails.id).toString(crypto.enc.Hex);
       localStorage.setItem('token', thisClientToken); // keep in session storage
 
-      this.http.get('https://www.api.almado-academy.fr/v1/clients/'+thisClientToken).subscribe({
+      this.http.get('https://api.almado-academy.fr/v1/clients/get/'+thisClientToken).subscribe({
         next: data => {
           // Si déjà dans la base : NE RIEN FAIRE
         },
         error: () => {
           // Si pas dans la base : ON L'AJOUTE
-          this.http.post<any>('https://www.api.almado-academy.fr/v1/clients/', {
+          this.http.post<any>('https://api.almado-academy.fr/v1/clients/create/', {
               "nom_complet": this.userDetails.name,
               "token": thisClientToken,
               "mail": this.userDetails.email,

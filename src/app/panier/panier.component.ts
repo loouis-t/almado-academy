@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 import { Router } from '@angular/router';
-// const htmlspecialchars = require('htmlspecialchars');
+const htmlspecialchars = require('htmlspecialchars');
 
 @Component({
   selector: 'app-panier',
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class PanierComponent implements OnInit {
 
-  url: string = "https://almado-academy.fr";
+  url: string = "https://www.almado-academy.fr";
 
   montant!: string;
   numero_commande!: string;
@@ -39,7 +39,7 @@ export class PanierComponent implements OnInit {
     
     if (localStorage.getItem('panier') != undefined) { 
       if ((storage[0]).token != null || this.clientToken != undefined) {         // transérer panier local dans BDD
-        this.http.post<any>('https://www.api.almado-academy.fr/v1/paniers/', {
+        this.http.post<any>('https://api.almado-academy.fr/v1/paniers/create/', {
           token: storage[0].token || this.clientToken,
           ref: storage[0].ref,
           prix: storage[0].prix
@@ -59,7 +59,7 @@ export class PanierComponent implements OnInit {
     
     if (this.clientToken != undefined) {
       // recuperer panier en BDD ou en local
-      this.http.get('https://www.api.almado-academy.fr/v1/paniers/'+this.clientToken).subscribe({
+      this.http.get('https://api.almado-academy.fr/v1/paniers/get/'+this.clientToken).subscribe({
         next: data => {
           // si user connecté : BDD
           this.panier = data;
@@ -68,7 +68,7 @@ export class PanierComponent implements OnInit {
           // récup mail de cette personne
           this.mail = (JSON.parse(localStorage.getItem('auth')!)).email;
           
-          this.http.get<any>('https://www.api.almado-academy.fr/v1/commandes/').subscribe({
+          this.http.get<any>('https://api.almado-academy.fr/v1/commandes/max/').subscribe({
             next: data => {
               this.numero_commande = data.a_attribuer;
             },
@@ -125,17 +125,17 @@ export class PanierComponent implements OnInit {
   pay(): void {
     if(!this.panier_vide) {
       if (localStorage.getItem('token') != undefined) {
-        // data to post to https://www.api.almado-academy.fr/v1 and CA module
+        // data to post to https://api.almado-academy.fr/v1 and CA module
         this.nom_complet = JSON.parse(localStorage.getItem('auth')!).name;
         this.billing = `<?xml version="1.0" encoding="utf-8"?><Billing><Address><FirstName>${this.nom_complet.split(" ")[0]}</Firstname><LastName>${this.nom_complet.split(" ")[1]}</LastName><Address1>33 bis chemin de Lagrange</Address1><ZipCode>31120</ZipCode><City>Roques</City><CountryCode>250</CountryCode></Address></Billing>`;
         this.shopping_cart = `<?xml version="1.0" encoding="utf-8"?><shoppingcart><total><totalQuantity>${this.panier.length}</totalQuantity></total></shoppingcart>`;
 
-        this.http.post<any>('https://www.api.almado-academy.fr/v1/paiement/', {
+        this.http.post<any>('https://api.almado-academy.fr/v1/paiement/', {
           token: localStorage.getItem('token'),
           numero_commande: this.numero_commande,
           mail: this.mail,
-          billing: this.billing,
-          shopping_cart: this.shopping_cart
+          nom_complet: this.nom_complet,
+          cart: this.panier.length
         }).subscribe({
           next: data => {
             //données pour le form
@@ -167,7 +167,7 @@ export class PanierComponent implements OnInit {
   removeFromCart(ref_to_remove: string): void {
     localStorage.removeItem('panier');
 
-    this.http.post<any>('https://www.api.almado-academy.fr/v1/paniers/delete', {
+    this.http.post<any>('https://api.almado-academy.fr/v1/paniers/delete/', {
       token: localStorage.getItem('token'),
       ref: ref_to_remove
     }).subscribe({
