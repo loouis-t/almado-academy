@@ -121,9 +121,7 @@
             padding: .5em 1em .5em 1em;
             border-radius: 10em;
             font-size: .75em;
-    
-            // border-radius: 10em;
-            // font-size: 1.25em;
+
             text-decoration: none;
             font-weight: 400;
 
@@ -132,6 +130,10 @@
             
             border: 1px solid c.$NEON_TRSP;
             box-shadow: c.$BOX_SHADOW;
+
+            &:hover {
+                animation: none;
+            }
         }
     }
 }

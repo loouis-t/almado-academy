@@ -103,6 +103,10 @@ article {
     
         a {
             font-size: .75em;
+
+            &:hover {
+                animation: none;
+            }
         }
     }
 }

@@ -104,6 +104,11 @@ article {
     box-shadow: c.$BOX_SHADOW;
 }
 
+@media screen and (max-width: 768px) {
+    article a:hover {
+        animation: none;
+    }
+}
 
 @keyframes onHover {
     0% {
