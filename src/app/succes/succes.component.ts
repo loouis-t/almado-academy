@@ -66,23 +66,26 @@ export class SuccesComponent implements OnInit {
                     }).subscribe({
                       next: data => {
                         console.log("Commande enregistrée.");
+
+                        // vider panier (uniquement si commande enregistrée)
+                        this.http.post('https://api.almado-academy.fr/v1/paniers/delete/', { 
+                          token: this.token,
+                          ref: "" // vide pour delete all
+                        }).subscribe({
+                          next: data => {
+                            console.log('Panier vidé.');
+                          },
+                          error: error => {
+                            console.log('Erreur lors du vidage du panier:\n'+error.error);
+                            this.router.navigate(['echec'], { queryParams: { Erreur: 'int002' } });
+                          }
+                        });
                       },
                       error: error => {
                         console.log('Impossible d\'enregistrer la commande: \n' + error.error);
                         this.router.navigate(['echec'], { queryParams: { Erreur: 'int001' } });
                       }
                     });
-                    
-                    // vider panier
-                    this.http.post('https://api.almado-academy.fr/v1/paniers/delete/', { token: this.token }).subscribe({
-                      next: data => {
-                        console.log('Panier vidé.');
-                      },
-                      error: error => {
-                        console.log('Erreur lors du vidage du panier:\n'+error.error);
-                        this.router.navigate(['echec'], { queryParams: { Erreur: 'int002' } });
-                      }
-                    })
                     this.router.navigate(['succes'], { queryParams: { Erreur: params['Erreur'], Sign: params['Sign'] } });
                   },
                   error: error => {
