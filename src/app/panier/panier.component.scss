@@ -85,7 +85,7 @@ article {
 
         color: c.$NEON_TRSP;
         
-        border: 1px solid c.$NEON_TRSP;
+        border: 2px solid c.$NEON_TRSP;
 
         cursor: pointer;
         
@@ -112,23 +112,23 @@ article {
 
 @keyframes onHover {
     0% {
-        border: 1px solid c.$NEON_TRSP;
+        border: 2px solid c.$NEON_TRSP;
         box-shadow: c.$BOX_SHADOW;
     }
     1% {
-        border: 1px solid rgba(255, 255, 255, .2);
+        border: 2px solid rgba(255, 255, 255, .2);
         box-shadow: none;
     }
     2% {
-        border: 1px solid c.$NEON_TRSP;
+        border: 2px solid c.$NEON_TRSP;
         box-shadow: c.$BOX_SHADOW;
     }
     3% {
-        border: 1px solid rgba(255, 255, 255, .2);
+        border: 2px solid rgba(255, 255, 255, .2);
         box-shadow: none;
     }
     4% {
-        border: 1px solid c.$NEON_TRSP;
+        border: 2px solid c.$NEON_TRSP;
         box-shadow: c.$BOX_SHADOW;
     }
 }

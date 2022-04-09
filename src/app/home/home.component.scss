@@ -18,7 +18,7 @@ article {
         top: 0; left: 0;
         background: url('../../assets/gt7.jpg') no-repeat;
         background-position: 50% 50%;
-        object-fit: cover;
+        background-size: cover;
         opacity: .5;
         z-index: -1;
     }
@@ -76,7 +76,7 @@ article {
             min-height: calc(16 * ((60vw) / 27)); // min: 16:9
 
             border-radius: 1em;
-            border: 1px solid rgba(255, 255, 255, .75);
+            border: 2px solid c.$NEON_TRSP;
             
             &:nth-of-type(2) {
                 box-shadow: c.$BOX_SHADOW;
@@ -146,7 +146,7 @@ article {
                         color: c.$NEON_TRSP;
                         text-shadow: c.$TEXT_SHADOW;
                         
-                        border: 1px solid c.$NEON_TRSP;
+                        border: 2px solid c.$NEON_TRSP;
                         box-shadow: c.$BOX_SHADOW;
                         
                         &:hover {
@@ -180,7 +180,7 @@ article {
         padding: 4em 15vw ;
     
         h2 {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
         }
     
         #prestations {
@@ -249,23 +249,23 @@ article {
 
 @keyframes onHover {
     0% {
-        border: 1px solid c.$NEON_TRSP;
+        border: 2px solid c.$NEON_TRSP;
         box-shadow: c.$BOX_SHADOW;
     }
     1% {
-        border: 1px solid rgba(255, 255, 255, .2);
+        border: 2px solid rgba(255, 255, 255, .2);
         box-shadow: none;
     }
     2% {
-        border: 1px solid c.$NEON_TRSP;
+        border: 2px solid c.$NEON_TRSP;
         box-shadow: c.$BOX_SHADOW;
     }
     3% {
-        border: 1px solid rgba(255, 255, 255, .2);
+        border: 2px solid rgba(255, 255, 255, .2);
         box-shadow: none;
     }
     4% {
-        border: 1px solid c.$NEON_TRSP;
+        border: 2px solid c.$NEON_TRSP;
         box-shadow: c.$BOX_SHADOW;
     }
 }
