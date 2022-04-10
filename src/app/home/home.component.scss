@@ -73,10 +73,13 @@ article {
             padding: 1.5em;
 
             width: calc((60vw) / 3);
+            height: calc(16 * ((60vw) / 27)); // force height: 16:9
             min-height: calc(16 * ((60vw) / 27)); // min: 16:9
 
             border-radius: 1em;
             border: 2px solid c.$NEON_TRSP;
+
+            overflow: hidden;
             
             &:nth-of-type(2) {
                 box-shadow: c.$BOX_SHADOW;
@@ -85,13 +88,13 @@ article {
 
             &:first-of-type, &:last-of-type {
                 width: calc(.95 * ((60vw) / 3));
+                height: calc(.95 * (16 * ((60vw) / 27))); // force height: 16:9
                 min-height: calc(.95 * (16 * ((60vw) / 27))); // min: 16:9
 
                 box-shadow: c.$BOX_SHADOW_RED;
             }
 
             h3 {
-                // font-weight: normal;
                 font-size: 1.75em;
                 margin: 0;
             }
@@ -99,8 +102,8 @@ article {
             .description {
 
                 ul {
-                    // color: c.$COLOR_TRSP;
-                    padding-top: 1em;
+                    padding: 0;
+                    margin: 0;
 
                     .pad {
                         padding: .25em 0em;
