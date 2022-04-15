@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as crypto from 'crypto-js';
@@ -9,6 +10,7 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider,
 } from 'angularx-social-login';
+import { exit } from 'process';
 
 @Component({
   selector: 'app-login',
@@ -22,9 +24,12 @@ export class LoginComponent implements OnInit {
   public type_connexion: string = "E";
   postId!: any;
 
-  formations_ligne!: any;
-  coachings!: any;
-  reglages!: any;
+  providedMail!: string;
+
+  browserIsFacebook: boolean = false;
+  deviceIsAndroid: boolean = false; 
+  noMailDetected: boolean = false;
+  incorrectMail: boolean = false;
 
   constructor(
     private authService: SocialAuthService,
@@ -34,13 +39,33 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    // if user agent is facebook:
+    if (navigator.userAgent.indexOf('FB') > -1) {
+      this.browserIsFacebook = true;
+    } else {
+      // if user agent is android mobile and contains "Instagram"
+      if (navigator.userAgent.indexOf("Instagram") > -1) {
+        if (/Android/i.test(navigator.userAgent)) {
+          this.deviceIsAndroid = true;
+          setTimeout(() => {
+            let open_default_browser: any = document.querySelector('#open-default-browser')!;
+            open_default_browser.click();
+          }, 250);
+        } else {
+          alert("Ce navigateur ne permet pas d'assurer la sécurité nécessaire à votre connexion.\nRouvrez cette page depuis Safari!");
+          this.router.navigate(['/']);
+        }
+      }
+    }
+
+
     this.handleUser();    // handle on changing page while navigating
   }
 
 
   // required functions
   signInHandler(service: string): void {
-    
     switch (service) {
       case "google":
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
@@ -88,8 +113,20 @@ export class LoginComponent implements OnInit {
       this.userDetails = JSON.parse(storage);
       this.type_connexion = localStorage.getItem('connectionType')!;
 
+      if (this.providedMail == null) {
+        if(this.userDetails.email == null) {
+          this.noMailDetected = true;   // afficher: veuillez préciser mail
+          return;
+        } else {
+          // ne travailler qu'avec la variable 'this.providedMail'
+          this.providedMail = this.userDetails.email;
+        }
+      }
+      // Placer mail dans cookie (reutilisation sur /dashboard)
+      localStorage.setItem('email', this.providedMail);
+
       // Gérer ajout en base
-      let thisClientToken = crypto.SHA256(this.type_connexion + this.userDetails.name + this.userDetails.mail + this.userDetails.id).toString(crypto.enc.Hex);
+      let thisClientToken = crypto.SHA256(this.type_connexion + this.userDetails.name + this.providedMail + this.userDetails.id).toString(crypto.enc.Hex);
       localStorage.setItem('token', thisClientToken); // keep in session storage
 
       this.http.get('https://api.almado-academy.fr/v1/clients/get/'+thisClientToken).subscribe({
@@ -101,7 +138,7 @@ export class LoginComponent implements OnInit {
           this.http.post<any>('https://api.almado-academy.fr/v1/clients/create/', {
               "nom_complet": this.userDetails.name,
               "token": thisClientToken,
-              "mail": this.userDetails.email,
+              "mail": this.providedMail,
               "type_connexion": this.type_connexion
           }).subscribe({
             next: data => {
@@ -122,9 +159,23 @@ export class LoginComponent implements OnInit {
           } else {
             this.router.navigate(['dashboard']);
           }
-        })
-      
+        });
+    }
+  }
 
+  async clientProvidesEmail() {
+    let mailInput: HTMLInputElement = document.querySelector('#provided-mail')!;
+    if (mailInput.value != null && mailInput.value.indexOf("@") > -1) {
+      this.providedMail = mailInput.value;
+      this.noMailDetected = false;
+      
+      this.handleUser();
+    } else {
+      // afficher message ~"mail incorrect" (2s)
+      this.incorrectMail = true;
+      setInterval(() => {
+        this.incorrectMail = false;
+      }, 2000);
     }
   }
 }

@@ -8,33 +8,50 @@
 		<li><a href="/apropos">A propos</a></li>
         <li><a href="/actu">Actualités</a></li>
 		<li><a href="/contact">Contact</a></li>
-		<li><a href="/panier"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABCElEQVRIid2UvU7CUBiGv0NCIHFRgVkX3U0M12Ax4ULcuQbTG2AyYTB6BV1N2LkDRsoEJEymGoWH5Uts2lrPyalEeefn/Wn7pSIHIWDLl0a/UbBJFbwBncpLtCjCX+N0Zi3TMaxgZ7vsCQww1SU920TgGFiqr/8TPFAwcigIi17Pd/AJ8KqXdWHBnwOJ8te2i0a6KLRgn5V9tApX05WaVkCzhOvq8gQ4sy5Q88ThNO9dw1vAwiI4AZ6AhmvBgwa8AMbJbBF+CnwC78Clb15uHVAXkbWIHDmHGZPLy/4qxBjzISJ3IrJ0Lfg7Am6BORADgS9XZIxTpzjz4XLfYC8CAl03A258uf+tHRJ0yCxh4Q3DAAAAAElFTkSuQmCC"></a></li>
-		<li><a href="/login?origin=global"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABC0lEQVRIie2UMUsDQRSEZ9OksjGg4CWdSZHa0tpCsPOvmF+SPxEOK00Q65RptLEQK4mVAU0Zwc/CUY7oXRZZuxt4HMzOm7nbt7dSjRQA2kAOLF3nQDel+YKfWABZioDchhdA5ro0N0oRsLRZVuA65l429TdiMvwMf33JavfPgeJtabvG5vIUAT3guWTI+wm+QfJgR8CrK09mXqP06AENSQeSjiUdStqT1PHyo6QnSVNJE0mzEMJ7VCLQBAbA/JeTU4Y5cAY0N5nvAreFxgdgCJwAfWDL1Tc3tOYLN8BOVcC1hffAKRD19wJHwJ17r6qEbxZtxxiv9bbcuyryYU2EEiCE8O0bc9nV+F98AHLxd02oUT9uAAAAAElFTkSuQmCC"></a></li>
+		<li><a href="/panier">
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABCElEQVRIid2UvU7CUBiGv0NCIHFRgVkX3U0M12Ax4ULcuQbTG2AyYTB6BV1N2LkDRsoEJEymGoWH5Uts2lrPyalEeefn/Wn7pSIHIWDLl0a/UbBJFbwBncpLtCjCX+N0Zi3TMaxgZ7vsCQww1SU920TgGFiqr/8TPFAwcigIi17Pd/AJ8KqXdWHBnwOJ8te2i0a6KLRgn5V9tApX05WaVkCzhOvq8gQ4sy5Q88ThNO9dw1vAwiI4AZ6AhmvBgwa8AMbJbBF+CnwC78Clb15uHVAXkbWIHDmHGZPLy/4qxBjzISJ3IrJ0Lfg7Am6BORADgS9XZIxTpzjz4XLfYC8CAl03A258uf+tHRJ0yCxh4Q3DAAAAAElFTkSuQmCC">
+		</a></li>
+		<li><a href="/login?origin=global">
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABC0lEQVRIie2UMUsDQRSEZ9OksjGg4CWdSZHa0tpCsPOvmF+SPxEOK00Q65RptLEQK4mVAU0Zwc/CUY7oXRZZuxt4HMzOm7nbt7dSjRQA2kAOLF3nQDel+YKfWABZioDchhdA5ro0N0oRsLRZVuA65l429TdiMvwMf33JavfPgeJtabvG5vIUAT3guWTI+wm+QfJgR8CrK09mXqP06AENSQeSjiUdStqT1PHyo6QnSVNJE0mzEMJ7VCLQBAbA/JeTU4Y5cAY0N5nvAreFxgdgCJwAfWDL1Tc3tOYLN8BOVcC1hffAKRD19wJHwJ17r6qEbxZtxxiv9bbcuyryYU2EEiCE8O0bc9nV+F98AHLxd02oUT9uAAAAAElFTkSuQmCC">
+		</a></li>
 	</ul>
 </header>
 
 <!-- si version mobile -->
 <header id="header" class="mobile">
 	<div id="navBar">
-		<label for="check" id="burger" (click)="displayMenu()">
-			<input type="checkbox" id="check">
-			<span></span>
-			<span></span>
-			<span></span>
-		</label>
+		<div class="sous-el">
+			<label for="check" id="burger" (click)="displayMenu()">
+				<input type="checkbox" id="check">
+				<span></span>
+				<span></span>
+				<span></span>
+			</label>
+		</div>
 	
-
-		<a href="/" id="titre"><h1>
+		<a href="/" id="titre" class="sous-el"><h1>
 			<img src="../assets/logo.png" alt="logo">
 		</h1></a>
+
+		<div class="panier-compte sous-el">
+			<a href="/panier">
+				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABCElEQVRIid2UvU7CUBiGv0NCIHFRgVkX3U0M12Ax4ULcuQbTG2AyYTB6BV1N2LkDRsoEJEymGoWH5Uts2lrPyalEeefn/Wn7pSIHIWDLl0a/UbBJFbwBncpLtCjCX+N0Zi3TMaxgZ7vsCQww1SU920TgGFiqr/8TPFAwcigIi17Pd/AJ8KqXdWHBnwOJ8te2i0a6KLRgn5V9tApX05WaVkCzhOvq8gQ4sy5Q88ThNO9dw1vAwiI4AZ6AhmvBgwa8AMbJbBF+CnwC78Clb15uHVAXkbWIHDmHGZPLy/4qxBjzISJ3IrJ0Lfg7Am6BORADgS9XZIxTpzjz4XLfYC8CAl03A258uf+tHRJ0yCxh4Q3DAAAAAElFTkSuQmCC">
+			</a>
+		</div>
 	</div>
 
 	<ul id="menu">
         <a href="/apropos" class="lien"><li>A propos</li></a>
 		<a href="/actu" class="lien"><li>Actualités</li></a>
 		<a href="/contact" class="lien"><li>Contact</li></a>
-		<a href="/panier" class="lien"><li>Panier</li></a>
-		<a  href="/login?origin=global" class="lien">Mon compte</a>
+		<a href="/panier" class="lien"><li>
+			Mon panier
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABCElEQVRIid2UvU7CUBiGv0NCIHFRgVkX3U0M12Ax4ULcuQbTG2AyYTB6BV1N2LkDRsoEJEymGoWH5Uts2lrPyalEeefn/Wn7pSIHIWDLl0a/UbBJFbwBncpLtCjCX+N0Zi3TMaxgZ7vsCQww1SU920TgGFiqr/8TPFAwcigIi17Pd/AJ8KqXdWHBnwOJ8te2i0a6KLRgn5V9tApX05WaVkCzhOvq8gQ4sy5Q88ThNO9dw1vAwiI4AZ6AhmvBgwa8AMbJbBF+CnwC78Clb15uHVAXkbWIHDmHGZPLy/4qxBjzISJ3IrJ0Lfg7Am6BORADgS9XZIxTpzjz4XLfYC8CAl03A258uf+tHRJ0yCxh4Q3DAAAAAElFTkSuQmCC">
+		</li></a>
+		<a href="/login?origin=global" class="lien"><li>
+			Mon compte
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABC0lEQVRIie2UMUsDQRSEZ9OksjGg4CWdSZHa0tpCsPOvmF+SPxEOK00Q65RptLEQK4mVAU0Zwc/CUY7oXRZZuxt4HMzOm7nbt7dSjRQA2kAOLF3nQDel+YKfWABZioDchhdA5ro0N0oRsLRZVuA65l429TdiMvwMf33JavfPgeJtabvG5vIUAT3guWTI+wm+QfJgR8CrK09mXqP06AENSQeSjiUdStqT1PHyo6QnSVNJE0mzEMJ7VCLQBAbA/JeTU4Y5cAY0N5nvAreFxgdgCJwAfWDL1Tc3tOYLN8BOVcC1hffAKRD19wJHwJ17r6qEbxZtxxiv9bbcuyryYU2EEiCE8O0bc9nV+F98AHLxd02oUT9uAAAAAElFTkSuQmCC">
+		</li></a>
 		<a class="copyrights"><li>Copyrights © 2021-{{ current_year }} Almado Academy</li></a>
 	</ul>
 </header>

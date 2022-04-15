@@ -37,7 +37,7 @@ article {
         
         align-self: center;
 
-        border: 1px solid c.$NEON_TRSP;
+        border: 2px solid c.$NEON_TRSP;
         border-radius: 1em;
         box-shadow: c.$BOX_SHADOW;
 
@@ -45,6 +45,8 @@ article {
             display: flex;
             align-items: center;
             justify-content: center;
+
+            column-gap: .5em;
 
             width: 20vw;
             padding: .5em 1em;
@@ -72,26 +74,88 @@ article {
             }
         }
 
-        hr {
-            align-self: center;
+        p:not([class="err-message"]) {
             position: relative;
-            margin: 2em .5vw;
-            width: 19vw;
-
-            border-bottom: 1px solid c.$COLOR_TRSP;
+            text-align: center;
+            font-weight: bold;
+            color: c.$COLOR_TRSP;
 
             &::before {
-                content: "ou";
+                content: '';
                 position: absolute;
-                top: 0; left: 50%;
-                padding: 0 .25em;
+                top: 50%; left: .5em;
+                width: calc(50% - 1.5em); height: 2px;
+                border-radius: 1px;
 
-                font-weight: bold;
-                color: c.$COLOR_TRSP;
-                background: black;
-
-                transform: translate(-50%, -50%);
+                background: c.$COLOR_TRSP;
             }
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%; right: .5em;
+                width: calc(50% - 1.5em); height: 2px;
+                border-radius: 1px;
+
+                background: c.$COLOR_TRSP;
+            }
+        }
+
+        /* If fb can't bring us mail */
+
+        h3 {
+            max-width: 20vw;
+            margin: 0;
+        }
+
+        input {
+            width: 20vw;
+            padding: .5em 1em;
+
+            text-align: center;
+            color: c.$COLOR;
+            font-size: 1em;
+            
+            background: transparent;
+            border: 2px solid c.$COLOR_TRSP;
+            border-radius: 1.45em;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .err-message {
+            color: red;
+            font-size: .8em;
+            font-weight: normal;
+            text-align: center;
+            margin: 0;
+        }
+    }
+
+    .mail-missing {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+    }
+
+    #open-default-browser {
+        position: relative;
+        text-align: center;
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 3em; height: 3em;
+            left: 50%; top: calc(100% + 2em);
+            transform: translate(-50%, 0);
+
+            border: 3px solid rgba(255, 255, 255, 0.75);
+            border-right-color: transparent;
+            border-radius: 50%;
+
+            animation: load 1s infinite linear;
         }
     }
 }
@@ -117,24 +181,27 @@ article {
                 width: calc(70vw - 2em);
                 font-size: .9em;
             }
-    
-            hr {
-                margin: 2em 1vw;
-                width: 58vw;
-    
-                &::before {
-                    content: "ou";
-                    position: absolute;
-                    top: 0; left: 50%;
-                    padding: 0 .25em;
-    
-                    font-weight: bold;
-                    color: c.$COLOR_TRSP;
-                    background: black;
-    
-                    transform: translate(-50%, -50%);
-                }
+
+            /* If fb can't bring us mail */
+
+            h3 {
+                max-width: calc(70vw - 2em);
+            }
+
+            input {
+                width: calc(70vw - 2em);
+                font-size: .9em;
             }
         }
+    }
+}
+
+@keyframes load {
+    from {
+        transform: translate(-50%, 0) rotateZ(0);
+    } 
+    
+    to {
+        transform: translate(-50%, 0) rotateZ(360deg);
     }
 }

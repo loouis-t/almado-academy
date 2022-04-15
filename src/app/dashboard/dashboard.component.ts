@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
   // required variables
   public userDetails: any;
   public type_connexion: string = "E";
+  
+  email!: string;
   postId!: any;
 
   commandes!: any;
@@ -39,12 +41,17 @@ export class DashboardComponent implements OnInit {
 
   handleUser(): void {
     const storage = localStorage.getItem('auth');
-
+    
     if (storage) {
       // Gérer session courante
       this.userDetails = JSON.parse(storage);
       this.type_connexion = localStorage.getItem('connectionType')!;
+      this.email = localStorage.getItem('email')!;
 
+      if (this.email == null && this.userDetails.email == null) {
+        this.signOut();
+      }
+      
       // récupérer commandes (recup token dans session)
       let thisClientToken = localStorage.getItem('token');
 
