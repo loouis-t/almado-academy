@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject, Injectable } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as crypto from 'crypto-js';
+const htmlspecialchars = require('htmlspecialchars');
 
 // import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
@@ -163,10 +163,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  async clientProvidesEmail() {
+  clientProvidesEmail() {
     let mailInput: HTMLInputElement = document.querySelector('#provided-mail')!;
     if (mailInput.value != null && mailInput.value.indexOf("@") > -1) {
-      this.providedMail = mailInput.value;
+      this.providedMail = htmlspecialchars(mailInput.value);
       this.noMailDetected = false;
       
       this.handleUser();
