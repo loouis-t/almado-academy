@@ -39,26 +39,27 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    // if user agent is facebook:
-    if (navigator.userAgent.indexOf('FB') > -1) {
-      this.browserIsFacebook = true;
-    } else {
-      // if user agent is android mobile and contains "Instagram"
-      if (navigator.userAgent.indexOf("Instagram") > -1) {
-        if (/Android/i.test(navigator.userAgent)) {
-          this.deviceIsAndroid = true;
-          setTimeout(() => {
-            let open_default_browser: any = document.querySelector('#open-default-browser')!;
-            open_default_browser.click();
-          }, 250);
-        } else {
-          alert("Ce navigateur ne permet pas d'assurer la sécurité nécessaire à votre connexion.\nRouvrez cette page depuis Safari!");
-          this.router.navigate(['/']);
-        }
+    // if user agent is Android
+    if (/Android/i.test(navigator.userAgent)) {
+      // if user agent is facebook or instagram (android)
+      if (navigator.userAgent.indexOf("Instagram") > -1 || navigator.userAgent.indexOf('FB') > -1) {
+        this.deviceIsAndroid = true;
+        // try to open default browser (android)
+        setTimeout(() => {
+          let open_default_browser: any = document.querySelector('#open-default-browser')!;
+          open_default_browser.click();
+        }, 250);
+      }
+    } else { // if NOT Android
+      // if from facebook (iPhone)
+      if (navigator.userAgent.indexOf('FB') > -1) {
+        this.browserIsFacebook = true;
+      } else if (navigator.userAgent.indexOf('Instagram') > -1) {
+        // if from instagram (iPhone)
+        alert("Ce navigateur ne permet pas d'assurer la sécurité nécessaire à votre connexion.\nRouvrez cette page depuis Safari!");
+        this.router.navigate(['/']);   
       }
     }
-
 
     this.handleUser();    // handle on changing page while navigating
   }
