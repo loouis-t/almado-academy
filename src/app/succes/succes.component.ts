@@ -16,6 +16,10 @@ export class SuccesComponent implements OnInit {
   prix!: string;
   numero_commande!: string;
 
+  api_prod: string = "https://api.almado-academy.fr/v1";
+  api_test: string = "/api";
+  api: string = this.api_test;
+
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -37,14 +41,14 @@ export class SuccesComponent implements OnInit {
           this.prix = (params['Mt'] / 100).toString();
 
           let uri_data = (this.route.snapshot as any)['_routerState'].url.split('succes?')[1].split('&Sign')[0]; // recupérer toute la chaine avant '&Sign'
-          this.http.post<any>('https://api.almado-academy.fr/v1/sign/', {
+          this.http.post<any>(this.api+'/sign/', {
             signature: params['Sign'],
             data: uri_data
           }).subscribe({
             next: data => {
               if (data['isVerified']) {
                 // récupérer toutes les refs pour savoir ce qui est commandé
-                this.http.get<any>('https://api.almado-academy.fr/v1/paniers/get/'+this.token).subscribe({
+                this.http.get<any>(this.api+'/paniers/get/'+this.token).subscribe({
                   next: data => {
                     // concaténer les ref
                     this.ref = "";
@@ -56,7 +60,7 @@ export class SuccesComponent implements OnInit {
                     }
         
                     // post: transférer panier vers commandes
-                    this.http.post<any>('https://api.almado-academy.fr/v1/commandes/create/', {
+                    this.http.post<any>(this.api+'/commandes/create/', {
                       nom_complet: this.nom_complet,
                       token: this.token,
                       ref: this.ref,
@@ -68,7 +72,7 @@ export class SuccesComponent implements OnInit {
                         console.log("Commande enregistrée.");
 
                         // vider panier (uniquement si commande enregistrée)
-                        this.http.post('https://api.almado-academy.fr/v1/paniers/delete/', { 
+                        this.http.post(this.api+'/paniers/delete/', { 
                           token: this.token,
                           ref: "" // vide pour delete all
                         }).subscribe({

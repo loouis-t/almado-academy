@@ -22,6 +22,10 @@ export class DashboardComponent implements OnInit {
 
   commandes!: any;
 
+  api_prod: string = "https://api.almado-academy.fr/v1";
+  api_test: string = "/api";
+  api: string = this.api_test;
+
 
   constructor(
     private authService: SocialAuthService,
@@ -55,7 +59,7 @@ export class DashboardComponent implements OnInit {
       // récupérer commandes (recup token dans session)
       let thisClientToken = localStorage.getItem('token');
 
-      this.http.get('https://api.almado-academy.fr/v1/commandes/get/'+thisClientToken).subscribe({
+      this.http.get(this.api+'/commandes/get/'+thisClientToken).subscribe({
         next: data => {
           this.commandes = data;
         },

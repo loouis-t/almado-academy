@@ -31,6 +31,10 @@ export class LoginComponent implements OnInit {
   noMailDetected: boolean = false;
   incorrectMail: boolean = false;
 
+  api_prod: string = "https://api.almado-academy.fr/v1";
+  api_test: string = "/api";
+  api: string = this.api_test;
+
   constructor(
     private authService: SocialAuthService,
     private http: HttpClient,
@@ -130,13 +134,13 @@ export class LoginComponent implements OnInit {
       let thisClientToken = crypto.SHA256(this.type_connexion + this.userDetails.name + this.providedMail + this.userDetails.id).toString(crypto.enc.Hex);
       localStorage.setItem('token', thisClientToken); // keep in session storage
 
-      this.http.get('https://api.almado-academy.fr/v1/clients/get/'+thisClientToken).subscribe({
+      this.http.get(this.api+'/clients/get/'+thisClientToken).subscribe({
         next: data => {
           // Si déjà dans la base : NE RIEN FAIRE
         },
         error: () => {
           // Si pas dans la base : ON L'AJOUTE
-          this.http.post<any>('https://api.almado-academy.fr/v1/clients/create/', {
+          this.http.post<any>(this.api+'/clients/create/', {
               "nom_complet": this.userDetails.name,
               "token": thisClientToken,
               "mail": this.providedMail,
