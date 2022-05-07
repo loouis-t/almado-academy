@@ -12,11 +12,11 @@ export class PanierComponent implements OnInit {
 
   url_prod: string = "https://www.almado-academy.fr";
   url_test: string = "http://localhost:4200";
-  url: string = this.url_prod;
+  url: string = this.url_test;
 
   api_prod: string = "https://api.almado-academy.fr/v1";
   api_test: string = "/api";
-  api: string = this.api_prod;
+  api: string = this.api_test;
 
   montant!: string;
   numero_commande!: string;
