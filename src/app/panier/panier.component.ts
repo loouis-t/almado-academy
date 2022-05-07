@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, JsonpClientBackend } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 const htmlspecialchars = require('htmlspecialchars');
 
@@ -12,11 +12,11 @@ export class PanierComponent implements OnInit {
 
   url_prod: string = "https://www.almado-academy.fr";
   url_test: string = "http://localhost:4200";
-  url: string = this.url_test;
+  url: string = this.url_prod;
 
   api_prod: string = "https://api.almado-academy.fr/v1";
   api_test: string = "/api";
-  api: string = this.api_test;
+  api: string = this.api_prod;
 
   montant!: string;
   numero_commande!: string;
@@ -74,15 +74,7 @@ export class PanierComponent implements OnInit {
           // récup mail de cette personne
           this.mail = (JSON.parse(localStorage.getItem('auth')!)).email;
           
-          this.http.get<any>(this.api+'/commandes/max/').subscribe({
-            next: data => {
-              this.numero_commande = data.a_attribuer;
-            },
-            error: error => {
-              console.log("Erreur lors de l'appel de la référence de commande (numéro de commande)\n" + error.message);
-              alert('Une erreur est survenue lors d\'un appel en base, veuillez nous excuser pour la gêne occasionnée. \nVous pouvez tenter d\'actualiser la page. Si le problème persiste, informez-nous : help@almado-academy.fr\n\ncode : 002');
-            }
-          });
+          
         },
         error: error => {
           // si non-connecté : local
@@ -103,7 +95,6 @@ export class PanierComponent implements OnInit {
   }
   
   getNomFromRef(ref: string) {
-    
     switch(ref) {
       case "almado-ac-reglage":
         return "Réglages vehicule";
@@ -136,34 +127,45 @@ export class PanierComponent implements OnInit {
         this.billing = `<?xml version="1.0" encoding="utf-8"?><Billing><Address><FirstName>${this.nom_complet.split(" ")[0]}</FirstName><LastName>${this.nom_complet.split(" ")[1]}</LastName><Address1>33 bis chemin de Lagrange</Address1><ZipCode>31120</ZipCode><City>Roques</City><CountryCode>250</CountryCode></Address></Billing>`;
         this.shopping_cart = `<?xml version="1.0" encoding="utf-8"?><shoppingcart><total><totalQuantity>${this.panier.length}</totalQuantity></total></shoppingcart>`;
 
-        this.http.post<any>(this.api+'/paiement/', {
-          token: localStorage.getItem('token'),
-          numero_commande: this.numero_commande,
-          mail: this.mail,
-          nom_complet: this.nom_complet,
-          cart: this.panier.length
-        }).subscribe({
+
+        this.http.get<any>(this.api+'/commandes/max/').subscribe({
           next: data => {
-            //données pour le form
-            this.hmac = data['cle'];
-            this.dateTime = data['date'];
-            this.montant = data['montant'];
-            
-            console.log(this.montant);
-            console.log(this.hmac);
-            console.log(this.dateTime);
-            console.log(this.billing);
-            
-            // submit
-            this.form = document.querySelector('#pay_form')!;
-            setTimeout(() => {
-              this.form.submit();
-            }, 250);
-          },
-          error: error => {
-            console.log('Impossible de récupérer les données de nécessaires au paiement: ' + error);
-          }
-        });
+            this.numero_commande = data.a_attribuer;
+            console.log(this.numero_commande);
+
+            this.http.post<any>(this.api+'/paiement/', {
+              token: localStorage.getItem('token'),
+              numero_commande: this.numero_commande,
+              mail: this.mail,
+              nom_complet: this.nom_complet,
+              cart: this.panier.length
+            }).subscribe({
+              next: data => {
+                //données pour le form
+                this.hmac = data['cle'];
+                this.dateTime = data['date'];
+                this.montant = data['montant'];
+                
+                console.log(this.montant);
+                console.log(this.hmac);
+                console.log(this.dateTime);
+                console.log(this.billing);
+                
+                // submit
+                this.form = document.querySelector('#pay_form')!;
+                setTimeout(() => {
+                  this.form.submit();
+                }, 250);
+              },
+              error: error => {
+                console.log('Impossible de récupérer les données de nécessaires au paiement: ' + error);
+              }
+            });
+        },
+        error: error => {
+          console.log("Erreur lors de l'appel de la référence de commande (numéro de commande)\n" + error.message);
+          alert('Une erreur est survenue lors d\'un appel en base, veuillez nous excuser pour la gêne occasionnée. \nVous pouvez tenter d\'actualiser la page. Si le problème persiste, informez-nous : help@almado-academy.fr\n\ncode : 002');
+        }});
       } else {
         this.router.navigate(['login'], { queryParams: { origin: 'panier' } });
       }
