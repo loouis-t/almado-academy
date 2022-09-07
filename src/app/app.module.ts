@@ -27,6 +27,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PanierComponent } from './panier/panier.component';
 import { SuccesComponent } from './succes/succes.component';
 import { EchecComponent } from './echec/echec.component';
+import { ComingBackComponent } from './coming-back/coming-back.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { EchecComponent } from './echec/echec.component';
     DashboardComponent,
     PanierComponent,
     SuccesComponent,
-    EchecComponent
+    EchecComponent,
+    ComingBackComponent
   ],
   imports: [
     BrowserModule,
@@ -49,18 +51,18 @@ import { EchecComponent } from './echec/echec.component';
     HttpClientModule,
     AppRoutingModule,
     RouterModule.forRoot([
-      { path: 'echec', component: EchecComponent },
-      { path: 'succes', component: SuccesComponent },
-      { path: 'panier', component: PanierComponent },
-      { path: 'produits/coaching', component: CoachingComponent },
-      { path: 'produits/formation', component: EnconstructionComponent },
-      { path: 'produits/reglage', component: EnconstructionComponent },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'actu', component: EnconstructionComponent },
-      { path: 'apropos', component: AproposComponent },
-      { path: 'contact', component: ContactComponent },
-      { path: '', component: HomeComponent },
+      // { path: 'echec', component: EchecComponent },
+      // { path: 'succes', component: SuccesComponent },
+      // { path: 'panier', component: PanierComponent },
+      // { path: 'produits/coaching', component: CoachingComponent },
+      // { path: 'produits/formation', component: EnconstructionComponent },
+      // { path: 'produits/reglage', component: EnconstructionComponent },
+      // { path: 'dashboard', component: DashboardComponent },
+      // { path: 'login', component: LoginComponent },
+      // { path: 'actu', component: EnconstructionComponent },
+      // { path: 'apropos', component: AproposComponent },
+      // { path: 'contact', component: ContactComponent },
+      { path: '', component: ComingBackComponent },
       { path: '404', component: ErrPageComponent},
       { path: '**', redirectTo: '/404'}
     ])

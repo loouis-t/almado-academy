@@ -114,5 +114,8 @@
       }
     }
   },
-  "defaultProject": "almado-academy"
+  "defaultProject": "almado-academy",
+  "cli": {
+    "analytics": false
+  }
 }

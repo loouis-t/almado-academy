@@ -1,0 +1,126 @@
+::selection {
+	background-color: white;
+	color: black;
+}
+
+article {
+	position: relative;
+	height: 95vh;
+	width: 100vw;
+	padding: 5rem;
+	
+	display: flex;
+	align-items: center;
+
+	overflow: hidden;
+	
+	section {
+		padding-top: 5vh;
+		max-width: 100%;
+		max-height: 100%;
+
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(2, 1fr);
+		grid-column-gap: 0px;
+		grid-row-gap: 0px;
+
+		font-size: 10vw;
+		font-weight: 100;
+		letter-spacing: 1rem;
+
+		img {
+			grid-area: 1 / 2 / 3 / 3;
+			width: clamp(40vw, 40vw, 40vw);
+			min-height: 25vw;
+			max-height: 30vw;
+			filter: grayscale(1);
+			opacity: .4;
+		}
+
+		.div2, .div3 {
+			transition: 1s ease-in-out;
+			
+			p {
+				transform: translateY(100%);
+
+				animation: here 750ms forwards;
+				margin: 0;
+			}
+		}
+		
+		.div2 { 
+			grid-area: 1 / 1 / 2 / 3; 
+		}
+		
+		.div3 { 
+			grid-area: 2 / 2 / 3 / 4; 
+			text-align: right;
+
+			p {
+				animation-delay: 250ms;
+			}
+		} 
+	}
+}
+
+footer {
+	width: 100vw;
+	height: 5vh;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	font-weight: 100;
+	font-size: larger;
+
+}
+
+@keyframes here {
+	from {
+		transform: translateY(100%);
+	}
+
+	to {
+		transform: translateY(0);
+	}
+}
+
+@media screen and ( max-width: 768px) {
+	article {
+		padding: 1rem;
+
+		section {
+			position: relative;
+			width: 100%;
+
+			display: flex;
+			flex-direction: column;
+			row-gap: 1rem;
+
+			letter-spacing: 0;//.5rem;
+			// font-weight: unset;
+
+			img {
+				min-height: 100vw;
+				width: 20vw;
+
+				align-self: center;
+				object-fit: cover;
+			}
+
+			.div2, .div3 {
+				position: absolute;
+				width: 100%;
+
+				top: 50%;
+				transform: translateY(-50%);
+
+				&:last-of-type {
+					transform: translateY(50%);
+				}
+			}
+		}
+	}
+}
